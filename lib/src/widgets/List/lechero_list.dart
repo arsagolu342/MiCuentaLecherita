@@ -1,28 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:tu_cuenta_lecherita/src/widgets/cards/lecheros_card.dart';
+import 'package:tu_cuenta_lecherita/src/services/milkman_service.dart';
+ 
 
-class LecherosList extends StatelessWidget {
+class LecherosList extends StatefulWidget {
   const LecherosList({Key?  key}) : super(key: key);
+
+  @override
+  _LecherosListState createState() => _LecherosListState();
+}
+
+class _LecherosListState extends State<LecherosList> {
+
+MilkmanService _service = MilkmanService();
+@override
+ void initState() {
+    super.initState();
+   _loadMilkmans();
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        PatientCard(img: "f1"),
-        PatientCard(img: "j1"),
-        PatientCard(img: "f1"),
-        PatientCard(img: "j1"),
-        PatientCard(img: "f1"),
-        PatientCard(img: "j1"),
-        PatientCard(img: "f1"),
-        PatientCard(img: "j1"),
-        PatientCard(img: "f1"),
-        PatientCard(img: "j1"),
-        PatientCard(img: "f1"),
-        PatientCard(img: "j1"),
-        PatientCard(img: "f1"),
-        PatientCard(img: "j1"),
+     
       ],
-    );
+    );}
+
+     _loadMilkmans() {
+    _service.getMilkmans().then((value) => print(value));
   }
 }

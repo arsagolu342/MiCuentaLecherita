@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:tu_cuenta_lecherita/src/models/milkman_models-.dart';
  
@@ -12,7 +11,7 @@ class MilkmanService {
     List<Milkman> items = [];
     try {
       var uri = Uri.https(
-          "https://us-central1-cuentalecherita.cloudfunctions.net/api", "/api/milkmans/1/100");
+          "us-central1-cuentalecherita.cloudfunctions.net", "/api/milkmans/1/100");
       final resp = await http.get(uri);
       if (resp.body.isEmpty) return items;
       List<dynamic> jsonList = json.decode(resp.body);

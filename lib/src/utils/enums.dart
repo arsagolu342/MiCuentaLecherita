@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tu_cuenta_lecherita/src/widgets/content/home_widget.dart'; 
+import 'package:tu_cuenta_lecherita/src/widgets/content/lechero_widget.dart';
 
 class ItemMenu {
   String label;
@@ -12,4 +14,5 @@ List<ItemMenu> menuOptions = [
   ItemMenu.create(Icons.people, "Lecheros"),
  
 ];
- 
+
+List<Widget> contentWidget = [HomeWidget(), MilkmanWidget()];

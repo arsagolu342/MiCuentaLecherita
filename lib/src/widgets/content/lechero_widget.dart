@@ -1,54 +1,16 @@
 import 'package:flutter/material.dart';
- 
-class LecheroDetailsWidget extends StatefulWidget {
-  const LecheroDetailsWidget({Key? key}) : super(key: key);
-  @override
-   createState() => _LecheroDetailsWidgetWidgetState();
-  }
- 
+import 'package:tu_cuenta_lecherita/src/widgets/List/lechero_list.dart';
 
-class _LecheroDetailsWidgetWidgetState extends State<LecheroDetailsWidget>
-    with SingleTickerProviderStateMixin {
-  static const List<Tab> myTabs = <Tab>[
-    Tab(text: 'Detalles'),
-    Tab(text: 'Pagos'),
-    Tab(text: 'Litros'),
-  ];
-
-  late TabController _tabController;
+class MilkmanWidget extends StatefulWidget {
+  const MilkmanWidget({Key? key}) : super(key: key);
 
   @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(vsync: this, length: myTabs.length);
-  }
+  _PatientsWidgetState createState() => _PatientsWidgetState();
+}
 
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
+class _PatientsWidgetState extends State<MilkmanWidget> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: TabBar(
-        labelColor: Theme.of(context).primaryColor,
-        controller: _tabController,
-        tabs: myTabs,
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: myTabs.map((Tab tab) {
-          final String label = tab.text!.toLowerCase();
-          return Center(
-            child: Text(
-              'This is the $label tab',
-              style: const TextStyle(fontSize: 36),
-            ),
-          );
-        }).toList(),
-      ),
-    );
+    return Expanded(child: SingleChildScrollView(child: LecherosList()));
   }
 }

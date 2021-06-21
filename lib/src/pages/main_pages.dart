@@ -8,11 +8,9 @@ class MainPage extends StatefulWidget {
   @override
   _MainPageState createState() => _MainPageState();
 }
+
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
-
-  get contentWidget => null;
-
   @override
   void initState() {
     super.initState();
@@ -22,75 +20,36 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       body: Container(
- child: CustomPaint(painter: FondoPaint1(),
- child: Column(
-   
-          children: [
-
-
-              Text(_selectedIndex == 0
-            ? widget.titulo: menuOptions[_selectedIndex].label,  textAlign: TextAlign.center,
-     style:TextStyle( fontSize: 40,height: 3, color: Colors.blue[900],  fontFamily: 'Karla'
-      ),
-    ),
-            Container(
-                height: 150.0,
-                    child: Container(
-              
-              height: double.infinity,
-              width: double.infinity,
-              
-             
-                
-            ),
-          ),
-          
-               
-          ],
-        ),
+      body: Container(
         
-     
-
-       ),
-       ),
-
-      /*
-      body: Center(
-
-        //child: CustomPaint(painter: FondoPaint1(),
- child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          
-          children: [
-              Text(_selectedIndex == 0
-            ? widget.titulo: menuOptions[_selectedIndex].label,  textAlign: TextAlign.center,
-     style:TextStyle( fontSize: 40,height: 3, color: Colors.blue[900],  fontFamily: 'Karla'
-      ),
-    ),
-            Container(
-                height: 150.0,
-                    child: Container(
-              
-              height: double.infinity,
-              width: double.infinity,
-              
-              child: CustomPaint(painter: FondoPaint1(),),
-                
-            ),
+        child: CustomPaint(
+          painter: FondoPaint1(),
+          child: Column(
+            children: [
+              Text(
+                _selectedIndex == 0
+                    ? widget.titulo
+                    : menuOptions[_selectedIndex].label,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 40,
+                    height: 3,
+                    color: Colors.blue[900],
+                    fontFamily: 'VT323'),
+              ),
+              Container(
+                height: 590.0,
+                margin: EdgeInsets.symmetric(horizontal: 14.0),
+                child: Container(
+                  child: contentWidget[_selectedIndex],
+                ),
+              ),
+            ],
           ),
-          
-               
-          ],
         ),
-        
-     
       ),
- */
       bottomNavigationBar: BottomNavigationBar(
-        //backgroundColor: Colors.blue,
+          //backgroundColor: Colors.blue,
           currentIndex: _selectedIndex,
           onTap: (value) {
             _selectedIndex = value;
@@ -99,8 +58,10 @@ class _MainPageState extends State<MainPage> {
             });
           },
           items: menuOptions
-              .map((e) =>
-                  BottomNavigationBarItem(icon: Icon(e.icon), label: e.label, backgroundColor: Colors.white))
+              .map((e) => BottomNavigationBarItem(
+                  icon: Icon(e.icon),
+                  label: e.label,
+                  backgroundColor: Colors.white))
               .toList()),
     );
   }
@@ -125,9 +86,9 @@ class FondoPaint1 extends CustomPainter {
 
     ovalPath.lineTo(0, size.height * 0.090);
     ovalPath.quadraticBezierTo(size.width * 0.07, size.height * 0.07,
-        size.width * 0.49, size.height * 0.05);
+    size.width * 0.49, size.height * 0.05);
     ovalPath.quadraticBezierTo(size.width * 0.78, size.height * 0.049,
-        size.width, size.height * 0.090);
+    size.width, size.height * 0.090);
     ovalPath.lineTo(size.width, 0);
     ovalPath.lineTo(0, 0);
 
@@ -140,4 +101,3 @@ class FondoPaint1 extends CustomPainter {
     return oldDelegate != this;
   }
 }
-  

@@ -1,7 +1,6 @@
  
 import 'dart:convert';
-
-import 'liter_milk_models.dart';
+ 
 
 Milkman milkmanFromJson(String str) => Milkman.fromJson(json.decode(str));
 
@@ -15,7 +14,7 @@ class Milkman {
         required this.ci,
         required this.direccion,
          required this.photo,
-         this.literMilks
+         
     });
     
     String nombre;
@@ -23,7 +22,7 @@ class Milkman {
     String ci;
     String direccion;
     String photo;
-    List<LiterMilk>? literMilks;
+ 
     factory Milkman.fromJson(Map<String, dynamic> json) => Milkman(
        
         nombre: json["nombre"],
@@ -31,9 +30,7 @@ class Milkman {
         ci: json["ci"],
         direccion: json["direccion"],
         photo: json["photo"],
-        literMilks: List<LiterMilk>.from(
-          json["literMilks"].map((x)=> LiterMilk.fromJson(x))),
-    );
+      );
 
     Map<String, dynamic> toJson() => {
        
@@ -41,7 +38,7 @@ class Milkman {
         "apellido": apellido,
         "ci": ci,
         "direccion": direccion,
-               "photo": photo,
-               "literMilks": List<dynamic>.from(literMilks!.map((x)=> x.toJson()))
+    "photo": photo,
+               
     };
 }

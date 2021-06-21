@@ -10,11 +10,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-           
+          
       home:MainPage(titulo: 'Inicio'),
-      title: 'Tu Cuenta Lecherita',
-      
-      
+      title: 'Tu Cuenta Lecherita',      
     );
   }
 }

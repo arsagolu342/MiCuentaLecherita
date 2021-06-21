@@ -18,9 +18,7 @@ class _LecherosPageState extends State<LecherosPage> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset("images/j1.jpg"),
-          Text("Josselyn", style: Theme.of(context).textTheme.headline3),
-          Text("22 años", style: Theme.of(context).textTheme.headline5),
+           
         ],
       ),
     );

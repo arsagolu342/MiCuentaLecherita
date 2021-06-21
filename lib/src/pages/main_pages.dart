@@ -12,11 +12,11 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
   @override
-  void initState() {
+  /*void initState() {
     super.initState();
     print("Inicio del estado");
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,13 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:tu_cuenta_lecherita/src/models/milkman_models-.dart';
- 
-
 class MilkmanService {
   MilkmanService();
-
-  //Future, indica que es una llama asíncrona
-  Future<List<Milkman>> getMilkmans() async {
+    Future<List<Milkman>> getMilkmans() async {
     List<Milkman> items = [];
     try {
       var uri = Uri.https(

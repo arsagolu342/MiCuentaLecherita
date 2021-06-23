@@ -2,62 +2,68 @@ import 'package:flutter/material.dart';
 import 'package:tu_cuenta_lecherita/src/pages/main_pages.dart';
 
 class Inicio extends StatefulWidget {
-  Inicio({Key? key }) : super(key: key);
- 
+  Inicio({Key? key}) : super(key: key);
 
   @override
   _InicioState createState() => _InicioState();
 }
 
 class _InicioState extends State<Inicio> {
+ 
+ 
   @override
   Widget build(BuildContext context) {
-      return Scaffold(
-         body: Container(
-            child: Stack(
+    double _width = MediaQuery.of(context).size.width;
 
-               children: <Widget>[
-         Text("Tu Cuenta Lecherita",  textAlign: TextAlign.center, style:TextStyle( height: 5,color: Colors.black, 
-         fontSize: 60 ),),
-        
-        new Center(
-          
-              child: Image(
-                 image: AssetImage('images/vaca.png'),
-                  height: 200,)
-                  ),
-      
-        Opacity(
-          opacity: 0.8,
-          child: Container(
-            height: double.infinity,
-            width: double.infinity,
-            child: CustomPaint(
-              painter: FondoPaint1(),
+    return Scaffold(
+      body: Container(
+        child: Stack(
+          children: <Widget>[
+            new Center(
+                child: Image(
+              image: AssetImage('images/vaca.png'),
+              height: 200,
+            )),
+            Opacity(
+              opacity: 0.8,
+              child: Container(
+                height: double.infinity,
+                width: double.infinity,
+                child: CustomPaint(
+                  painter: FondoPaint1(),
+                ),
+              ),
             ),
-          ),
+            Text(
+              "Tu Cuenta Lecherita",
+              textAlign: TextAlign.center,
+              style: TextStyle(height: 5, color: Colors.black, fontSize: 60),
+            ),
+            SizedBox(
+                  width: _width * 1,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MainPage(titulo: 'Inicio')),
+                      );
+                    },
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Icon(Icons.arrow_forward_ios_outlined),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+          ],
         ),
-        TextButton(
-      style: TextButton.styleFrom(
-    primary: Colors.blue,
-  ) ,
-  onPressed: () {  Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => MainPage(titulo: 'Inicio')),
-            );},
-  child: Text('TextButton'),
-)
-
-      ],
-      
-    ),
-
-   
-           
-     ),);
+      ),
+    );
   }
 }
-
 
 class FondoPaint1 extends CustomPainter {
   @override
@@ -104,4 +110,3 @@ class FondoPaint1 extends CustomPainter {
     canvas.drawPath(path, paint); //esto es lo que permite que se dibuje todo
   }
 }
- 

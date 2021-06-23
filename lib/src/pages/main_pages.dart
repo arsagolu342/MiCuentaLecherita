@@ -21,35 +21,37 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        
         child: CustomPaint(
           painter: FondoPaint1(),
-          child: Column(
-            children: [
-              Text(
-                _selectedIndex == 0
-                    ? widget.titulo
-                    : menuOptions[_selectedIndex].label,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 40,
-                    height: 3,
-                    color: Colors.blue[900],
-                    fontFamily: 'VT323'),
-              ),
-              Container(
-                height: 590.0,
-                margin: EdgeInsets.symmetric(horizontal: 14.0),
-                child: Container(
-                  child: contentWidget[_selectedIndex],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Text(
+                  _selectedIndex == 0
+                      ? widget.titulo
+                      : menuOptions[_selectedIndex].label,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 40,
+                      height: 3,
+                      color: Colors.blue[900],
+                      fontFamily: 'VT323'),
                 ),
-              ),
-            ],
+                Container(
+                  height: 590.0,
+                  margin: EdgeInsets.symmetric(horizontal: 14.0),
+                  child: Container(
+                    child: contentWidget[_selectedIndex],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-          //backgroundColor: Colors.blue,
+          backgroundColor: Colors.blue[900],
+          selectedItemColor: Colors.white,
           currentIndex: _selectedIndex,
           onTap: (value) {
             _selectedIndex = value;
@@ -86,9 +88,9 @@ class FondoPaint1 extends CustomPainter {
 
     ovalPath.lineTo(0, size.height * 0.090);
     ovalPath.quadraticBezierTo(size.width * 0.07, size.height * 0.07,
-    size.width * 0.49, size.height * 0.05);
+        size.width * 0.49, size.height * 0.05);
     ovalPath.quadraticBezierTo(size.width * 0.78, size.height * 0.049,
-    size.width, size.height * 0.090);
+        size.width, size.height * 0.090);
     ovalPath.lineTo(size.width, 0);
     ovalPath.lineTo(0, 0);
 

@@ -19,11 +19,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       mainAxisSize: MainAxisSize.min,
       
       children: [
-       Text("Pagos Pendientes", textAlign: TextAlign.center, style: TextStyle(color: Colors.blue[900], fontSize: 15),),
-        SizedBox(
-          height: _heigth * 0.4,
-          child: Container(color: Color(0xFF04B8FF)),
-        ),
+        
         Text("Pagos Pendientes", textAlign: TextAlign.center, style: TextStyle(color: Colors.blue[900], fontSize: 15),),
         Expanded(child: SingleChildScrollView(child: PagosList()))
       ],

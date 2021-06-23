@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tu_cuenta_lecherita/src/models/milkman_models-.dart';
-import 'package:tu_cuenta_lecherita/src/pages/lecheros_page.dart';
+import 'package:tu_cuenta_lecherita/src/models/milkman_models-.dart'; 
+import 'package:tu_cuenta_lecherita/src/widgets/content/InfoCard.dart';
 
 class LecheroCard extends StatelessWidget {
   const LecheroCard({Key? key, required this.milkman}) : super(key: key);
@@ -18,7 +18,7 @@ final Milkman milkman;
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => LecherosPage(milkman: milkman),
+                builder: (context) => InfoCard(milkman: milkman),
               ));
         },
         title: Text(milkman.nombre + " " + milkman.apellido, style: TextStyle(color: Colors.white, fontSize: 20),),

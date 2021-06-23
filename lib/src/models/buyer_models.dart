@@ -14,14 +14,14 @@ class Buyer {
         required this.apellido,
         required this.direccion,
         required this.valorxLitro,
-        required this.photo,
+        this.photo,
     });
 
     String nombre;
     String apellido;
     String direccion;
     String valorxLitro;
-    String photo;
+    String? photo;
 
     factory Buyer.fromJson(Map<String, dynamic> json) => Buyer(
         nombre: json["nombre"],

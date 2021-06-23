@@ -22,6 +22,9 @@ class _LecherosListState extends State<LecherosList> {
  Widget build(BuildContext context) {
     return _milkman.length == 0
         ? Container(
+          height: 400,
+          
+
             child: Center(child: Text('Recolectando la Informacion....', textAlign: TextAlign.start, style: TextStyle(color: Colors.blue[900], fontSize: 15),),),
           )
         : Column(

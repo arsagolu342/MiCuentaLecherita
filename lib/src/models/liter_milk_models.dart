@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final literMilk = literMilkFromJson(jsonString);
-
 import 'dart:convert';
 
 LiterMilk literMilkFromJson(String str) => LiterMilk.fromJson(json.decode(str));

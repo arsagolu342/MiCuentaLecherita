@@ -1,8 +1,6 @@
  
 import 'dart:convert';
-
-import 'dart:ffi';
-
+ 
 Payment paymentFromJson(String str) => Payment.fromJson(json.decode(str));
 
 String paymentToJson(Payment data) => json.encode(data.toJson());
@@ -14,9 +12,9 @@ class Payment {
         required this.total,
     });
 
-    DateTime fechaPago;
-    Float subtotal;
-    Float total;
+    String fechaPago;
+    String subtotal;
+    String total;
 
     factory Payment.fromJson(Map<String, dynamic> json) => Payment(
         fechaPago: json["fecha_pago"],

@@ -1,19 +1,23 @@
-  
 import 'package:flutter/material.dart';
- 
- class MilkmanDetailsWidget extends StatefulWidget{
+import 'package:tu_cuenta_lecherita/src/models/milkman_models-.dart';
+import 'package:tu_cuenta_lecherita/src/widgets/List/pagos_list.dart'; 
 
-   const MilkmanDetailsWidget({Key? key}) : super(key: key);
+
+class MilkmanDetailsWidget extends StatefulWidget {
+  const MilkmanDetailsWidget({Key? key, required this.milkman})
+      : super(key: key);
+  final Milkman milkman;
+
   @override
   _MilkmanDetailsWidgetState createState() => _MilkmanDetailsWidgetState();
- }
+}
 
- class   _MilkmanDetailsWidgetState extends State<  MilkmanDetailsWidget>
+class _MilkmanDetailsWidgetState extends State<MilkmanDetailsWidget>
     with SingleTickerProviderStateMixin {
   static const List<Tab> myTabs = <Tab>[
     Tab(text: 'Detalles'),
-    Tab(text: 'Terapias'),
-    Tab(text: 'Alergias'),
+    Tab(text: 'Historial'),
+    Tab(text: 'Pagos' ),
   ];
 
   late TabController _tabController;
@@ -40,16 +44,44 @@ import 'package:flutter/material.dart';
       ),
       body: TabBarView(
         controller: _tabController,
-        children: myTabs.map((Tab tab) {
-          final String label = tab.text!.toLowerCase();
-          return Center(
-            child: Text(
-              'This is the $label tab',
-              style: const TextStyle(fontSize: 36),
-            ),
-          );
-        }).toList(),
+        children: [_detail(),_historial(), _payments()],
       ),
+    );
+  }
+
+  _detail() {
+    return Column(
+      children: [],
+    );
+  }
+_historial(){
+
+   return Column(
+      children: [],
+    );
+}
+  _payments() {
+   
+    return Column(
+      children: [
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(vertical: 14.0),
+        //   child: ElevatedButton.icon(
+        //       onPressed: () => {},
+        //       icon: Icon(Icons.add_box, color: _color),
+        //       label: Container(
+        //         padding: const EdgeInsets.symmetric(vertical: 7.0),
+        //         // child: Text("Agregar nuevo",
+        //         //     style: Theme.of(context)
+        //         //         .textTheme
+        //         //         .bodyText1
+        //         //         ?.apply(color: _color)),
+        //       )),
+        // ),
+        Expanded(
+            child: SingleChildScrollView(
+                child: PaymentList(idmilkman: widget.milkman.idmilkman)))
+      ],
     );
   }
 }

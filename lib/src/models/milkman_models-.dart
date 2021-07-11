@@ -1,25 +1,30 @@
 import 'dart:convert';
-import 'package:tu_cuenta_lecherita/src/models/liter_milk_models.dart';
-import 'package:tu_cuenta_lecherita/src/models/payment_models.dart';
+
 Milkman milkmanFromJson(String str) => Milkman.fromJson(json.decode(str));
 String milkmanToJson(Milkman data) => json.encode(data.toJson());
 class Milkman {
   Milkman(
-      {required this.nombre,
+      {
+      required this.idmilkman,  
+      required this.nombre,
       required this.apellido,
       required this.ci,
       required this.direccion,
       this.photo,
-      this.literMilk,
-      this.payment});
+      // this.literMilk,
+      // this.payment
+      });
+      
+  String idmilkman;   
   String nombre;
   String apellido;
   String ci;
   String direccion;
   String? photo;
-  List<LiterMilk>? literMilk;
-  List<Payment>? payment;
+  // List<LiterMilk>? literMilk;
+  // List<Payment>? payment;
   factory Milkman.fromJson(Map<String, dynamic> json) => Milkman(
+        idmilkman: json["idmilkman"],
         nombre: json["nombre"],
         apellido: json["apellido"],
         ci: json["ci"],
@@ -33,12 +38,14 @@ class Milkman {
         */
       );
   Map<String, dynamic> toJson() => {
+        "idmilkman": idmilkman,
         "nombre": nombre,
         "apellido": apellido,
         "ci": ci,
         "direccion": direccion,
         "photo": photo,
-        "literMilk": List<dynamic>.from(literMilk!.map((x) => x.toJson())),
-        "payment": List<dynamic>.from(payment!.map((x) => x.toJson())),
+      //   "literMilk": List<dynamic>.from(literMilk!.map((x) => x.toJson())),
+      //   "payment": List<dynamic>.from(payment!.map((x) => x.toJson())),
+      // 
       };
 }

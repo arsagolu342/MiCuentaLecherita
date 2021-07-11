@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tu_cuenta_lecherita/src/widgets/List/pagos_list.dart';
-
+import 'package:tu_cuenta_lecherita/src/widgets/List/test_list.dart';
+ 
 
 class HomeWidget extends StatefulWidget {
   HomeWidget({Key? key}) : super(key: key);

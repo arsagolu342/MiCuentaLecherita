@@ -1,18 +1,22 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
-import 'package:tu_cuenta_lecherita/src/models/milkman_models-.dart';
-class MilkmanService {
-  MilkmanService();
-    Future<List<Milkman>> getMilkmans() async {
-    List<Milkman> items = [];
+import 'package:tu_cuenta_lecherita/src/models/payment_models.dart';
+ 
+class PaymentService {
+  PaymentService();
+
+  //Future, indica que es una llama asíncrona
+  Future<List<Payment>> getPayment(String idmilkman) async {
+    List<Payment> items = [];
     try {
       var uri = Uri.https(
-           "us-central1-cuentalecherita.cloudfunctions.net", "/api/milkmans/1/100");
+         "us-central1-cuentalecherita.cloudfunctions.net", "/api/payments/$idmilkman");
       final resp = await http.get(uri);
       if (resp.body.isEmpty) return items;
       List<dynamic> jsonList = json.decode(resp.body);
       for (var item in jsonList) {
-        final milkman = new Milkman.fromJson(item);
+        final milkman = new Payment.fromJson(item);
         items.add(milkman);
       }
       return items;

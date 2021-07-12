@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tu_cuenta_lecherita/src/pages/milkman_form.dart';
 import 'package:tu_cuenta_lecherita/src/utils/enums.dart';
 
 class MainPage extends StatefulWidget {
@@ -20,7 +21,22 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+       floatingActionButton: _selectedIndex == 1
+          ? FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MilkmanForm(),
+                    ));
+              },
+              child: const Icon(Icons.add),
+            )
+          : null,
       body: Container(
+
+        
         child: CustomPaint(
           painter: FondoPaint1(),
           child: SingleChildScrollView(
@@ -37,7 +53,7 @@ class _MainPageState extends State<MainPage> {
                       color: Colors.blue[900],
                       fontFamily: 'VT323'),
                 ),
-                Container(
+                Container (
                   height: 590.0,
                   margin: EdgeInsets.symmetric(horizontal: 14.0),
                   child: Container(
@@ -49,6 +65,8 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
       ),
+
+
       bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Colors.blue[900],
           selectedItemColor: Colors.white,

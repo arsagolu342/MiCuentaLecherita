@@ -7,11 +7,11 @@ class LiterMilkService {
   LiterMilkService();
 
   //Future, indica que es una llama asíncrona
-  Future<List<LiterMilk>> getLiterMilk(String idMilkman) async {
+  Future<List<LiterMilk>> getLiterMilk(String idmilkman) async {
     List<LiterMilk> items = [];
     try {
       var uri = Uri.https(
-         "us-central1-cuentalecherita.cloudfunctions.net", "api/literMilks/$idMilkman");
+         "us-central1-cuentalecherita.cloudfunctions.net", "api/literMilks/$idmilkman");
       final resp = await http.get(uri);
       if (resp.body.isEmpty) return items;
       List<dynamic> jsonList = json.decode(resp.body);

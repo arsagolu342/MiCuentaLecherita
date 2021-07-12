@@ -23,10 +23,19 @@ class _PaymentListState extends State<PaymentList> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 14.0, vertical: 7.0),
-      child: _payments.length == 0
-          ? Container()
+    return Card(
+      color:  Color(0xFF04B8FF),
+      shape: RoundedRectangleBorder(
+              side:new  BorderSide(color: Color(0xFFFF6A14)),  
+              borderRadius: new BorderRadius.all(new Radius.circular(7))),      child: _payments.length == 0
+          ? Container(
+
+             height: 400,
+          
+
+            child: Center(child: Text('Recolectando la Informacion....', textAlign: TextAlign.start, style: TextStyle(color: Colors.blue[900], fontSize: 15),),),
+          
+          )
           : Column(
               children: _payments
                   .map((e) => ListTile(

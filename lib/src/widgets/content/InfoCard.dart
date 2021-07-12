@@ -48,6 +48,13 @@ class InfoCard extends StatelessWidget {
                     margin: new EdgeInsets.symmetric(horizontal: 20.0),
                   ),
                 ),
+                Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14.0),
+          child:  FloatingActionButton(
+              onPressed: () => {},
+              child: const Icon(Icons.add_chart_outlined),
+              ),
+        ),
               ],
             ),
           ],

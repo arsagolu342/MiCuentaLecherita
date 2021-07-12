@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final literMilk = literMilkFromJson(jsonString);
-
 import 'dart:convert';
 
 LiterMilk literMilkFromJson(String str) => LiterMilk.fromJson(json.decode(str));
@@ -10,7 +6,7 @@ String literMilkToJson(LiterMilk data) => json.encode(data.toJson());
 
 class LiterMilk {
     LiterMilk({
-       this.idliterMilk,
+       required this.idliterMilk,
        required this.fechaEntrega,
        required this.subtotalLiter,
        required this.totalLiter,
@@ -18,7 +14,7 @@ class LiterMilk {
        this.description
     });
 
-    String? idliterMilk;
+    String idliterMilk;
     String fechaEntrega;
     String subtotalLiter;
     String totalLiter;
@@ -27,7 +23,7 @@ class LiterMilk {
 
     factory LiterMilk.fromJson(Map<String, dynamic> json) => LiterMilk(
         idliterMilk: json["idliterMilk"],
-        fechaEntrega: json["fecha_entrega"],
+        fechaEntrega: json["fechaEntrega"],
         subtotalLiter: json["subtotalLiter"],
         totalLiter: json["totalLiter"],
         idmilkman: json["idmilkman"],
@@ -36,7 +32,7 @@ class LiterMilk {
 
     Map<String, dynamic> toJson() => {
         "idliterMilk": idliterMilk,
-        "fecha_entrega": fechaEntrega,
+        "fechaEntrega": fechaEntrega,
         "subtotalLiter": subtotalLiter,
         "totalLiter": totalLiter,
         "idmilkman": idmilkman,

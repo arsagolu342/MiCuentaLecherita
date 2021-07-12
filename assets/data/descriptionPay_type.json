@@ -1,0 +1,13 @@
+  [{
+          "name": "Pagado",
+          "description": "Se han pagado todos los valores adeudados."
+      },
+      {
+          "name": "Pendiente de pago",
+          "description": "Aun no se ha cancelado el valor Total al lechero."
+      },
+      {
+          "name": "Medio Pago",
+          "description": "Se cancelo un porcentaje del valor total al lechero."
+      }
+  ]

@@ -20,23 +20,38 @@ class _LecherosListState extends State<LecherosList> {
     _loadPacients();
   }
  Widget build(BuildContext context) {
+ 
     return _milkman.length == 0
         ? Container(
           height: 400,
-          
-
-            child: Center(child: Text('Recolectando la Informacion....', textAlign: TextAlign.start, style: TextStyle(color: Colors.blue[900], fontSize: 15),),),
+             child: Center(child: Text('Recolectando la Informacion....', textAlign: 
+             TextAlign.start, style: TextStyle(color: Colors.blue[900], fontSize: 15),),),
+                 
+              
           )
         : Column(
+            
+          
             mainAxisSize: MainAxisSize.min,
             children:
-                _milkman.map((e) => LecheroCard(milkman: e)).toList());
-  }
+            
+                _milkman.map((e) => LecheroCard(milkman: e)).toList(),
+                
+                
+                
+                
+                
+                );
 
+                
+  }
+ 
   _loadPacients() {
     _service.getMilkmans().then((value) {
       _milkman = value;
       setState(() {});
     });
   }
+
+  
 } 

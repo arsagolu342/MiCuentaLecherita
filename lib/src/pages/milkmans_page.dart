@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tu_cuenta_lecherita/src/models/milkman_models-.dart';
 import 'package:tu_cuenta_lecherita/src/widgets/content/milkman_details.dart';
- 
+
 class MilkmanPage extends StatefulWidget {
   const MilkmanPage({Key? key, required this.milkman}) : super(key: key);
   final Milkman milkman;
@@ -24,38 +24,25 @@ class _MilkmanPageState extends State<MilkmanPage> {
   }
 
   _appBar() {
-   double _heigth = MediaQuery.of(context).size.height;
-    double _width = MediaQuery.of(context).size.width;
-    
-        return SliverAppBar(
-            title: Text(widget.milkman.nombre + " " + widget.milkman.apellido),
-            backgroundColor: Theme.of(context).canvasColor,
-            pinned: true,
-            expandedHeight: 350.0,
-            flexibleSpace: FlexibleSpaceBar(
-                background: Column(children:  [
-              Container(
-                  height: 150.0,
-                   child: SingleChildScrollView(
-                  child: Stack(
-              children: [
-                Column(
-                  children: [
-                     
-                   
-                SizedBox(
-                  width: _width * 1,
-                  height: _heigth * 0.4,
-                  child: Container(
-                    color: Color(0xFF04B8FF),
-                    margin: new EdgeInsets.symmetric(horizontal: 20.0),
-                  ),
-                ),
-              ],
+    return SliverAppBar(
+      title: Text(
+        widget.milkman.nombre + " " + widget.milkman.apellido,
+        textAlign: TextAlign.start,
+        style: TextStyle(color: Colors.blue[900], fontSize: 15),
+      ),
+      expandedHeight: 350.0,
+      flexibleSpace: FlexibleSpaceBar(
+        background: Column(
+          children: [
+            Container(
+              height: 150.0,
+              child: SingleChildScrollView(),
             ),
           ],
         ),
-               ), ),
-            ], ),),);
+      ),
+    );
   }
 }
+
+// Pagina que se muestra al dar click al nombre del lechero

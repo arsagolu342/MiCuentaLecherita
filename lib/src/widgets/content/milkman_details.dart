@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tu_cuenta_lecherita/src/models/milkman_models-.dart';
+import 'package:tu_cuenta_lecherita/src/widgets/List/literMilk_list.dart';
 import 'package:tu_cuenta_lecherita/src/widgets/List/pagos_list.dart'; 
 
 
@@ -16,7 +17,7 @@ class _MilkmanDetailsWidgetState extends State<MilkmanDetailsWidget>
     with SingleTickerProviderStateMixin {
   static const List<Tab> myTabs = <Tab>[
     Tab(text: 'Detalles'),
-    Tab(text: 'Historial'),
+    Tab(text: 'Historial de Litros'),
     Tab(text: 'Pagos' ),
   ];
 
@@ -51,13 +52,29 @@ class _MilkmanDetailsWidgetState extends State<MilkmanDetailsWidget>
 
   _detail() {
     return Column(
-      children: [],
+      
     );
   }
 _historial(){
 
    return Column(
-      children: [],
+
+     
+      children: [
+
+          Expanded(
+            child: SingleChildScrollView(
+                child: LiterMilkList(idmilkman: widget.milkman.idmilkman))),
+      Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14.0),
+          child:  FloatingActionButton(
+              onPressed: () => {},
+              child: const Icon(Icons.add_chart_outlined),
+              ),
+        ),
+      ],
+
+      
     );
 }
   _payments() {
@@ -80,7 +97,14 @@ _historial(){
         // ),
         Expanded(
             child: SingleChildScrollView(
-                child: PaymentList(idmilkman: widget.milkman.idmilkman)))
+                child: PaymentList(idmilkman: widget.milkman.idmilkman))),
+                Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14.0),
+          child:  FloatingActionButton(
+              onPressed: () => {},
+              child: const Icon(Icons.payment_outlined),
+              ),
+        ),
       ],
     );
   }

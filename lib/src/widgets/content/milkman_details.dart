@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tu_cuenta_lecherita/src/models/milkman_models-.dart';
+import 'package:tu_cuenta_lecherita/src/pages/literMilk_form.dart';
 import 'package:tu_cuenta_lecherita/src/widgets/List/literMilk_list.dart';
 import 'package:tu_cuenta_lecherita/src/widgets/List/pagos_list.dart'; 
 
@@ -68,7 +69,14 @@ _historial(){
       Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14.0),
           child:  FloatingActionButton(
-              onPressed: () => {},
+              onPressed: () => {
+                 Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          LiterMilkForm(idmilkman: widget.milkman.idmilkman),
+                    ))
+              },
               child: const Icon(Icons.add_chart_outlined),
               ),
         ),
@@ -80,21 +88,7 @@ _historial(){
   _payments() {
    
     return Column(
-      children: [
-        // Padding(
-        //   padding: const EdgeInsets.symmetric(vertical: 14.0),
-        //   child: ElevatedButton.icon(
-        //       onPressed: () => {},
-        //       icon: Icon(Icons.add_box, color: _color),
-        //       label: Container(
-        //         padding: const EdgeInsets.symmetric(vertical: 7.0),
-        //         // child: Text("Agregar nuevo",
-        //         //     style: Theme.of(context)
-        //         //         .textTheme
-        //         //         .bodyText1
-        //         //         ?.apply(color: _color)),
-        //       )),
-        // ),
+      children: [ 
         Expanded(
             child: SingleChildScrollView(
                 child: PaymentList(idmilkman: widget.milkman.idmilkman))),

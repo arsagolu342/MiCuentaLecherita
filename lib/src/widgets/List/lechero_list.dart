@@ -19,39 +19,32 @@ class _LecherosListState extends State<LecherosList> {
     super.initState();
     _loadPacients();
   }
- Widget build(BuildContext context) {
- 
+
+  Widget build(BuildContext context) {
     return _milkman.length == 0
         ? Container(
-          height: 400,
-             child: Center(child: Text('Recolectando la Informacion....', textAlign: 
-             TextAlign.start, style: TextStyle(color: Colors.blue[900], fontSize: 15),),),
-                 
-              
+            height: 400,
+            child: Center(
+              child: Text(
+                'Recolectando la Informacion....',
+                textAlign: TextAlign.start,
+                style: TextStyle(color: Colors.blue[900], fontSize: 15),
+              ),
+            ),
           )
-        : Column(
-            
-          
-            mainAxisSize: MainAxisSize.min,
-            children:
-            
-                _milkman.map((e) => LecheroCard(milkman: e)).toList(),
-                
-                
-                
-                
-                
-                );
-
-                
+        : Padding(
+          padding:  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 14.0),
+          child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: _milkman.map((e) => LecheroCard(milkman: e)).toList(),
+            ),
+        );
   }
- 
+
   _loadPacients() {
     _service.getMilkmans().then((value) {
       _milkman = value;
       setState(() {});
     });
   }
-
-  
-} 
+}

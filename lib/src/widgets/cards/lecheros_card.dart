@@ -24,7 +24,7 @@ final Milkman milkman;
         title: Text(milkman.nombre + " " + milkman.apellido, style: TextStyle(color: Colors.white, fontSize: 20),),
         subtitle: Text(milkman.direccion, style: TextStyle(color: Colors.white ),),
         leading:  FadeInImage(
-                placeholder: AssetImage('images/user.png'),
+                placeholder: AssetImage('../assets/images/user.png'),
                 image: NetworkImage(milkman.photo.toString())),
     ),
     );

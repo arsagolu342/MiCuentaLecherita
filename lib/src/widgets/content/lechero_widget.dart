@@ -11,11 +11,9 @@ class MilkmanWidget extends StatefulWidget {
 class _PatientsWidgetState extends State<MilkmanWidget> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      
-      child: SingleChildScrollView(
+    return SingleChildScrollView(
         
-        child: LecherosList()),
+        child: LecherosList()
     
     );
  

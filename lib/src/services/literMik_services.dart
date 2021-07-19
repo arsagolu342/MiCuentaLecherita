@@ -25,4 +25,19 @@ class LiterMilkService {
       return items;
     }
   }
+Future<dynamic> sendLiterMilk(LiterMilk literMilk) async {
+    try {
+      final Map<String, String> _headers = {"content-type": "application/json"};
+      var uri =
+          Uri.https("us-central1-cuentalecherita.cloudfunctions.net", "/api/literMilks");
+      final resp = await http.post(uri,
+          headers: _headers, body: literMilkToJson(literMilk));
+      if (resp.body.isEmpty) return null;
+      return json.decode(resp.body);
+    } on Exception catch (e) {
+      print("Exception $e");
+      return null;
+    }
+  }
+
 }

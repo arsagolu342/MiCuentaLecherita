@@ -9,23 +9,15 @@ class Inicio extends StatefulWidget {
 }
 
 class _InicioState extends State<Inicio> {
- 
- 
   @override
   Widget build(BuildContext context) {
-    double _width = MediaQuery.of(context).size.width;
+    // double _width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: Container(
         child: Stack(
           children: <Widget>[
-            new Center(
-                child: Image(
-              image: AssetImage('images/vaca.png'),
-              height: 200,
-            )),
-            Opacity(
-              opacity: 0.8,
+            Container(
               child: Container(
                 height: double.infinity,
                 width: double.infinity,
@@ -33,31 +25,45 @@ class _InicioState extends State<Inicio> {
                   painter: FondoPaint1(),
                 ),
               ),
-            ),
-            Text(
-              "Tu Cuenta Lecherita",
-              textAlign: TextAlign.center,
-              style: TextStyle(height: 5, color: Colors.black, fontSize: 60),
+            ), Center(
+              child: Image(
+                image: AssetImage('../assets/images/vaca.png'),
+                height: 300,
+              ),
             ),
             SizedBox(
-                  width: _width * 1,
-                  child: ElevatedButton(
+            
+            
+                  child: FloatingActionButton(
+ 
                     onPressed: () {
+                      
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => MainPage(titulo: 'Inicio')),
                       );
                     },
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Icon(Icons.arrow_forward_ios_outlined),
-                        ],
-                      ),
-                    ),
+                    child: const Icon(Icons.arrow_forward_ios_outlined),
+                    
                   ),
+                              
+
+                  height: 900,
+              
+            ),
+            
+            ListTile(
+              title: Text("Tu Cuenta Lecherita",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(height:7, color: Colors.black, fontSize: 40),
                 ),
+    
+         
+
+ 
+              
+            ),
           ],
         ),
       ),

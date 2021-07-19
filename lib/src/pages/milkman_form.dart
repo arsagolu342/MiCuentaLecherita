@@ -14,6 +14,7 @@ class _MilkmanFormState extends State<MilkmanForm> {
     print("Inicio del estado");
   }
 */
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,19 +86,7 @@ _inputApellido() {
       decoration: InputDecoration(labelText: "Apellidos"), maxLength: 35);
 }
 
-// _inputBirth() {
-//   return DateTimeField(
-//     format: DateFormat("dd/MMM/yyyy"),
-//     onShowPicker: (context, currentValue) {
-//       return showDatePicker(
-//           context: context,
-//           firstDate: DateTime(1900),
-//           initialDate: currentValue ?? DateTime.now(),
-//           lastDate: DateTime(2100));
-//     },
-//   );
-// }
-
+ 
 _inputCi() {
   return TextFormField(
     decoration: InputDecoration(labelText: "Cédula"),
@@ -110,7 +99,9 @@ _inputDireccion() {
       maxLength: 255,
       maxLines: 4);
 }
+ 
 
+ 
 class FondoPaint1 extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {

@@ -8,6 +8,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.6.1"
+  auto_size_text:
+    dependency: transitive
+    description:
+      name: auto_size_text
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0-nullsafety.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -69,6 +76,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_holo_date_picker:
+    dependency: "direct main"
+    description:
+      name: flutter_holo_date_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0-nullsafety.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -170,6 +184,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0"
+  time_formatter:
+    dependency: "direct main"
+    description:
+      name: time_formatter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0+5"
   typed_data:
     dependency: transitive
     description:

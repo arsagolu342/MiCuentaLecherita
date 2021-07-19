@@ -27,30 +27,49 @@ class _LiterMilkListState extends State<LiterMilkList> {
     return Card(
       color:  Color(0xFF04B8FF),
       shape: RoundedRectangleBorder(
+             
               side:new  BorderSide(color: Color(0xFFFF6A14)),  
-              borderRadius: new BorderRadius.all(new Radius.circular(7))),  
+              borderRadius: new BorderRadius.all(new Radius.circular(7))), 
+               
                   child: _liter.length == 0
           ? Container(
              height: 400,
             child: Center(child: Text('Recolectando la Informacion....', textAlign: TextAlign.start, style: TextStyle(color: Colors.blue[900], fontSize: 15),),),
           
           )
+          
           : Column(
+              
+              
               children: _liter
+              
                   .map((e) => ListTile(
                         onTap: () => {},
-                        title: Text("Estado" + " " +   e.description.toString()),
+                        title: Text("Litros : " + " " +   e.subtotalLiter.toString()),
                         subtitle:
-                            Text("Fecha del ultimo pago" + " " +  e.fechaEntrega.toString()),
+                            Text("Fecha de la ultima recolección: " + " " +  e.fechaEntrega.toString()),
                              leading: Container(
                                
-                                child: Text("Total a pagar"+ " " + e.subtotalLiter.toString() ),
-                                    
+                                child: Text( " " + e.description.toString() ),
+                                     
                              ),
+                              trailing: Container(
+                                child: Card(
+                                    color:  Color(0xFF94E1FF),
+                                    child:  Text("Total de litros:" + " "+ e.totalLiter.toString())
+                                      
+                                ),
+                              ),
+
                       ))
                       
                   .toList(),
+                 
+
+
             ),
+            
+
     );
   }
 

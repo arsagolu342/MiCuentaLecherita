@@ -21,4 +21,22 @@ class MilkmanService {
       return items;
     }
   }
+
+  Future<dynamic> sendMilkman(Milkman milkman) async {
+    try {
+      final Map<String, String> _headers = {"content-type": "application/json"};
+      var uri =
+          Uri.https( "us-central1-cuentalecherita.cloudfunctions.net", "/api/milkmans");
+ 
+      final resp = await http.post(uri, headers: _headers, body:   milkmanToJson(milkman));
+      if (resp.body.isEmpty) return null;
+      return json.decode(resp.body);
+    } on Exception catch (e) {
+      print("Exception $e");
+      return null;
+    }
+  }
+
+
+
 }

@@ -30,8 +30,8 @@ class MilkmanService {
       final Map<String, String> _headers = {"content-type": "application/json"};
       var uri =
           Uri.https("us-central1-cuentalecherita.cloudfunctions.net","/api/milkmans");
-      String pacientJson = milkmanToJson(milkman);
-      final resp = await http.post(uri, headers: _headers, body: pacientJson);
+      String milkmanJson = milkmanToJson(milkman);
+      final resp = await http.post(uri, headers: _headers, body: milkmanJson);
       if (resp.body.isEmpty) return null;
       return json.decode(resp.body);
     } on Exception catch (e) {

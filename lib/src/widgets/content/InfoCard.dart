@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tu_cuenta_lecherita/src/models/milkman_models-.dart';
-import 'package:tu_cuenta_lecherita/src/pages/main_pages.dart';
+import 'package:tu_cuenta_lecherita/src/models/milkman_models-.dart'; 
 
 class InfoCard extends StatelessWidget {
   const InfoCard({Key? key, required this.milkman}) : super(key: key);
@@ -21,11 +20,7 @@ class InfoCard extends StatelessWidget {
                   width: _width * 1,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MainPage(titulo: 'Inicio')),
-                      );
+                      Navigator.pop(context);
                     },
                     child: Column(
                       children: [

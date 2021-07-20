@@ -1,9 +1,10 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tu_cuenta_lecherita/src/models/milkman_models-.dart';
-import 'package:tu_cuenta_lecherita/src/services/milkman_service.dart'; 
+import 'package:tu_cuenta_lecherita/src/services/milkman_service.dart';
+
 class MilkmanForm extends StatefulWidget {
   MilkmanForm({Key? key}) : super(key: key);
 
@@ -13,10 +14,10 @@ class MilkmanForm extends StatefulWidget {
 
 class _MilkmanFormState extends State<MilkmanForm> {
   final formKey = GlobalKey<FormState>();
- 
-  MilkmanService _servicePacient = new MilkmanService();
+
+  MilkmanService _milkmanService = new MilkmanService();
   //Un objeto del modelo a enviar
-  late Milkman _pacient;
+  late Milkman _milkman;
   late File _image;
   bool _onSaving = false;
   bool _imageSelected = false;
@@ -25,94 +26,123 @@ class _MilkmanFormState extends State<MilkmanForm> {
   @override
   void initState() {
     super.initState();
-    _pacient = new Milkman.create("nombre"," apellido"," ci", "direccion");
+    _milkman = new Milkman.create("", "", "", "");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       
-        body: SingleChildScrollView(
-          child: Stack(
-            alignment: AlignmentDirectional.topCenter,
-            children: [
-             
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 25.0),
-                child: Column(
-                  children: [
-                    Stack(
-                      alignment: AlignmentDirectional.bottomCenter,
-                      children: [
-                        _showImage(),
-                        Container(
-                          width: 325.0,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Tooltip(
-                                message: "Tomar foto",
-                                child: ElevatedButton(
-                                  onPressed: _takeImage,
-                                  child: Icon(Icons.camera_alt),
-                                 
+        body: Container(
+         
+        
+        child: CustomPaint(
+          painter: FondoPaint1(),
+          child: SingleChildScrollView(
+            child: Container(
+              child: Stack(
+                alignment: AlignmentDirectional.topCenter,
+                children: [
+                  Center(
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Padding(
+                           padding: const EdgeInsets.symmetric(vertical: 90.0),
+                            child: Stack(
+                              alignment: AlignmentDirectional.bottomCenter,
+                              children: [
+                                _showImage(),
+                                Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+
+
+                                      Tooltip(
+                                        message: "Tomar foto",
+                                        child: ElevatedButton(
+                                          onPressed: _takeImage,
+                                          child: Icon(Icons.camera_alt),
+                                        ),
+                                      ),
+                                      Tooltip(
+                                        message: "Buscar foto",
+                                        child: ElevatedButton(
+                                          onPressed: _pickImage,
+                                          child: Icon(Icons.image),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Tooltip(
-                                message: "Buscar foto",
-                                child: ElevatedButton(
-                                  onPressed: _pickImage,
-                                  child: Icon(Icons.image),
-                                  
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                          
+                          _form()
+                          ,_back()
+                        ],
+                      ),
                     ),
-                    
-                    _form()
-                  ],
-                ),
-              )
-            ],
+                  )
+                ],
+              ),
+            ),
           ),
-        ));
+        ),
+      
+    ));
+  }
+  _back(){
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 70.0),
+      child: ElevatedButton(
+
+ onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Column(
+                         mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(Icons.arrow_back_ios_new_outlined),
+                        ],
+                      ),
+
+      ),
+    );
   }
 
   _form() {
     final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
         child: Container(
-      padding: EdgeInsets.symmetric(horizontal: 14.0),
       width: size.width * .85,
       decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          borderRadius: BorderRadius.circular(10.0),
-          border: Border.all(color: Theme.of(context).dividerColor)),
+        color: Theme.of(context).scaffoldBackgroundColor,
+        borderRadius: BorderRadius.circular(10.0),
+      ),
       child: Form(
           key: formKey,
           child: Container(
-            margin: EdgeInsets.symmetric(vertical: 14.0, horizontal: 7.0),
             child: Column(
               children: [
-                _inputName(),
-                _inputSurname(),
-                _inputCity(),
+                _inputNombre(),
+                _inputApellido(),
                 _inputCi(),
-                _buttons()
+                _inputDireccion(),
+                 _buttons()
               ],
             ),
           )),
     ));
   }
 
-  _inputName() {
+  _inputNombre() {
     return TextFormField(
-        initialValue: _pacient.nombre,
+        initialValue: _milkman.nombre,
         onSaved: (value) {
-          _pacient.nombre = value.toString();
+          _milkman.nombre = value.toString();
         },
         validator: (value) {
           if (value!.length < 3) {
@@ -125,11 +155,11 @@ class _MilkmanFormState extends State<MilkmanForm> {
         maxLength: 35);
   }
 
-  _inputSurname() {
+  _inputApellido() {
     return TextFormField(
-        initialValue: _pacient.apellido,
+        initialValue: _milkman.apellido,
         onSaved: (value) {
-          _pacient.apellido = value.toString();
+          _milkman.apellido = value.toString();
         },
         validator: (value) {
           if (value!.length < 3) {
@@ -142,38 +172,38 @@ class _MilkmanFormState extends State<MilkmanForm> {
         maxLength: 35);
   }
 
-  _inputCity() {
+  _inputDireccion() {
     return TextFormField(
-        initialValue: _pacient.direccion,
+        initialValue: _milkman.direccion,
         onSaved: (value) {
-          _pacient.direccion = value.toString();
+          _milkman.direccion = value.toString();
         },
         validator: (value) {
-          if (value!.length < 3) {
-            return "Debe ingresar un apellido con al menos 3 caracteres";
+          if (value!.length < 5) {
+            return "Debe ingresar una direccion con al menos 5 caracteres";
           } else {
             return null;
           }
         },
-        decoration: InputDecoration(labelText: "Ciudad"),
+        decoration: InputDecoration(labelText: "Dirección"),
         maxLength: 25);
   }
 
-     _inputCi() {
+  _inputCi() {
     return TextFormField(
-        initialValue: _pacient.ci,
+        initialValue: _milkman.ci,
         onSaved: (value) {
-          _pacient.ci = value.toString();
+          _milkman.ci = value.toString();
         },
         validator: (value) {
           if (value!.length < 3) {
-            return "Debe ingresar un apellido con al menos 3 caracteres";
+            return "Debe ingresar un numero de cedula de 10 digitos";
           } else {
             return null;
           }
         },
-        decoration: InputDecoration(labelText: "Ciudad"),
-        maxLength: 25);
+        decoration: InputDecoration(labelText: "Cédula"),
+        maxLength: 10);
   }
 
   _buttons() {
@@ -190,8 +220,7 @@ class _MilkmanFormState extends State<MilkmanForm> {
                 _onSaving = true;
                 setState(() {});
               },
-              child: Icon(Icons.save),
-             
+              child: const Text('Guardar'),
             ),
           );
   }
@@ -203,11 +232,11 @@ class _MilkmanFormState extends State<MilkmanForm> {
     formKey.currentState!.save();
 
     if (_imageSelected) {
-      _pacient.photo = await _servicePacient.uploadImage(_image);
+      _milkman.photo = await _milkmanService.uploadImage(_image);
     }
 
     //Llamamos al servicio para guardar el reporte
-    _servicePacient.sendPacient(_pacient).then((value) {
+    _milkmanService.sendPacient(_milkman).then((value) {
       formKey.currentState!.reset();
       Navigator.pop(context);
     });
@@ -245,5 +274,45 @@ class _MilkmanFormState extends State<MilkmanForm> {
       _imageSelected = false;
     }
     setState(() {});
+  }
+}
+
+class FondoPaint1 extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    curva1(canvas, size);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
+  }
+
+  void curva1(Canvas canvas, Size size) {
+    final paint = Paint();
+
+    paint.color = Color(0xFF0059FD);
+    paint.style = PaintingStyle
+        .fill; // .stroke es para dibujar una linea y  .fill es para pintar todo
+    paint.strokeWidth = 10.0;
+
+    final path = new Path();
+
+    /*
+    (0,0)-(0,size.heigth)-(size.width,size.heigth)-(size.width,0)
+     */
+
+    path.lineTo(0, size.height * 0.5);
+    path.quadraticBezierTo(size.width * 0.2, size.height * 0.17,
+        size.width * 0.5, size.height * 0.2);
+    path.quadraticBezierTo(
+        size.width * 0.85, size.height * 0.27, size.width, size.height * 0.25);
+    path.lineTo(size.width, 0);
+    path.lineTo(0, 0);
+
+    path.moveTo(0, size.height * 0.9); //salto del pincel o lapiz
+     
+
+    canvas.drawPath(path, paint); //esto es lo que permite que se dibuje todo
   }
 }

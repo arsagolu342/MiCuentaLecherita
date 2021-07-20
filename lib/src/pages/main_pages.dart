@@ -54,7 +54,7 @@ class _MainPageState extends State<MainPage> {
                       fontFamily: 'VT323'),
                 ),
                 Container (
-                  height: 590.0,
+                  height: 600.0,
                   margin: EdgeInsets.symmetric(horizontal: 14.0),
                   child: Container(
                     child: contentWidget[_selectedIndex],

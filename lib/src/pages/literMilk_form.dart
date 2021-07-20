@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
-import 'package:intl/intl.dart';
- 
 import 'package:tu_cuenta_lecherita/src/models/description_model.dart';
 import 'package:tu_cuenta_lecherita/src/models/liter_milk_models.dart';
 import 'package:tu_cuenta_lecherita/src/services/description_type_service.dart';
-import 'package:tu_cuenta_lecherita/src/services/literMik_services.dart';
- 
+import 'package:tu_cuenta_lecherita/src/services/literMik_services.dart';    
 
 class LiterMilkForm extends StatefulWidget {
   LiterMilkForm({Key? key, required this.idmilkman}) : super(key: key);
@@ -27,34 +24,33 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
 
   //Un objeto del modelo a enviar
   late LiterMilk _literMilk;
+  bool _onSaving = false;
 
   @override
   void initState() {
     super.initState();
-    _loadTypeDescription();
-    _literMilk = LiterMilk.create(DateFormat.yMMMd().format(_selectedDate), "", "", widget.idmilkman, "Seleccione");
-  }
+    _loadTypeTreatments();
+    _literMilk = LiterMilk.create( _selectedDate , "" , widget.idmilkman, "Litros completos");}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
          
-        body: Stack(
-          alignment: AlignmentDirectional.topCenter,
-          children: [
-             
-            Column(
-              children: [
-                SizedBox(height: 35.0),
-                SizedBox(
-                  height: 120.0,
-                  
-                ),
+        body: SingleChildScrollView(
+          child: Stack(
+            alignment: AlignmentDirectional.topCenter,
+            children: [
+            
+              Column(
+                children: [
+                  SizedBox(height: 35.0),
                 
-                _form()
-              ],
-            )
-          ],
+              
+                  _form()
+                ],
+              )
+            ],
+          ),
         ));
   }
 
@@ -78,9 +74,9 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
                       EdgeInsets.symmetric(vertical: 32.0, horizontal: 14.0),
                   child: Column(
                     children: [
-                     
-                      _imputSubtotal(), _inputType(),
-                      _inputStartDate(),
+                      _inputType(),
+                      _inputSubtotal(),
+                      _inputFecha(),
                       _buttons()
                     ],
                   ),
@@ -90,40 +86,17 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
       ),
     );
   }
-_inputStartDate() {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text("Fecha de inicio", style: Theme.of(context).textTheme.bodyText1),
-          DatePickerWidget(
-            looping: false, // default is not looping
-            firstDate: DateTime(2021), //DateTime(1960),
-            dateFormat: "dd-MMMM-yyyy",
-            locale: DatePicker.localeFromString('es'),
-            onChange: (DateTime newDate, _) {
-              _selectedDate = newDate;
-              _literMilk.fechaEntrega = _selectedDate.toString();
-            },
-            pickerTheme: DateTimePickerTheme(
-              itemTextStyle: TextStyle(color: Theme.of(context).primaryColor),
-              dividerColor: Theme.of(context).disabledColor,
-            ),
-          )
-        ],
-      ),
-    );
-  }
-  _imputSubtotal() {
+
+  _inputSubtotal() {
     return TextFormField(
         initialValue: _literMilk.subtotalLiter,
         onSaved: (value) {
           //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
-          _literMilk.totalLiter = value.toString();
-        },
-         
-        decoration: InputDecoration(labelText: "Litros recolectados el dia de hoy"),
-       );
+          _literMilk.subtotalLiter = value.toString();
+        }, 
+        decoration: InputDecoration(labelText: "Litros del día"),
+        maxLength: 255,
+        maxLines: 4);
   }
 
   _inputType() {
@@ -151,19 +124,49 @@ _inputStartDate() {
     );
   }
 
-  
-
-  _buttons() {
-    return Tooltip(
-      message: "Guardar",
-      child: ElevatedButton(
-        onPressed: () {
-          _sendForm();
-        },
-        child: Icon(Icons.save),
-       
+  _inputFecha() {
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("Fecha de entrega", style: Theme.of(context).textTheme.subtitle1),
+          DatePickerWidget(
+            looping: false, // default is not looping
+            dateFormat: "yyyy-MMMM-dd",
+            locale: DatePicker.localeFromString('es'),
+            onChange: (DateTime newDate, _) {
+              _selectedDate = newDate;
+              _literMilk.fechaEntrega = _selectedDate;
+            },
+            pickerTheme: DateTimePickerTheme(
+              backgroundColor: Theme.of(context).canvasColor,
+              itemTextStyle: TextStyle(color: Theme.of(context).primaryColor),
+              dividerColor: Theme.of(context).disabledColor,
+            ),
+          )
+        ],
       ),
     );
+  }
+
+  _buttons() {
+    return _onSaving
+        ? Container(
+            height: 50.0,
+            width: 50.0,
+            child: Center(child: CircularProgressIndicator()))
+        : Tooltip(
+            message: "Guardar",
+            child: ElevatedButton(
+              onPressed: () {
+                _sendForm();
+                _onSaving = true;
+                setState(() {});
+              },
+              child: Icon(Icons.save),
+             
+            ),
+          );
   }
 
   _sendForm() async {
@@ -175,11 +178,11 @@ _inputStartDate() {
     //Llamamos al servicio para guardar el reporte
     _literMilkservice.sendLiterMilk(_literMilk).then((value) {
       formKey.currentState!.reset();
-      print(value);
+      Navigator.pop(context);
     });
   }
 
-  _loadTypeDescription() {
+  _loadTypeTreatments() {
     _serviceTypeDescription.getTypes().then((value) {
       _types = value;
       setState(() {});

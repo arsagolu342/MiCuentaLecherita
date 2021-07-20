@@ -5,24 +5,24 @@ String milkmanToJson(Milkman data) => json.encode(data.toJson());
 class Milkman {
   Milkman(
       {
-      required this.idmilkman,  
+      this.idmilkman,  
       required this.nombre,
       required this.apellido,
       required this.ci,
       required this.direccion,
-      this.photo,
-      // this.literMilk,
-      // this.payment
-      });
-      
-  String idmilkman;   
+      required this.photo,
+           });
+Milkman.create(this.nombre, this.apellido, this.ci,this.direccion );
+
+  String? idmilkman;   
   String nombre;
   String apellido;
   String ci;
   String direccion;
-  String? photo;
-  // List<LiterMilk>? literMilk;
-  // List<Payment>? payment;
+  String?  photo;
+  getNombre() {
+    return nombre + " " + apellido;
+  }
   factory Milkman.fromJson(Map<String, dynamic> json) => Milkman(
         idmilkman: json["idmilkman"],
         nombre: json["nombre"],
@@ -30,13 +30,7 @@ class Milkman {
         ci: json["ci"],
         direccion: json["direccion"],
         photo: json["photo"],
-        /*literMilk: List<Allergy>.from(
-            json["literMilk"]?.map((x) => LiterMilk.fromJson(x))),
-        */
-        /*payment: List<Payment>.from(
-            json["payment"]?.map((x) => Payment.fromJson(x))),
-        */
-      );
+           );
   Map<String, dynamic> toJson() => {
         "idmilkman": idmilkman,
         "nombre": nombre,
@@ -44,8 +38,6 @@ class Milkman {
         "ci": ci,
         "direccion": direccion,
         "photo": photo,
-      //   "literMilk": List<dynamic>.from(literMilk!.map((x) => x.toJson())),
-      //   "payment": List<dynamic>.from(payment!.map((x) => x.toJson())),
-      // 
+
       };
 }

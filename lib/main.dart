@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       home:Inicio( ),    
-     // home:MainPage(titulo: 'Inicio'),
+     // home:Ma5inPage(titulo: 'Inicio'),
       title: 'Tu Cuenta Lecherita',      
     );
   }

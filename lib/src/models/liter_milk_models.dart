@@ -11,7 +11,7 @@ class LiterMilk {
        required this.subtotalLiter,
        required this.totalLiter,
        required this.idmilkman,
-      required this.description
+       required this.description
     });
 
   

@@ -1,13 +1,17 @@
 import 'dart:convert';
+import 'dart:io';
+ 
+import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:http/http.dart' as http;
 import 'package:tu_cuenta_lecherita/src/models/milkman_models-.dart';
+
 class MilkmanService {
   MilkmanService();
-    Future<List<Milkman>> getMilkmans() async {
+  Future<List<Milkman>> getMilkmans() async {
     List<Milkman> items = [];
     try {
-      var uri = Uri.https(
-           "us-central1-cuentalecherita.cloudfunctions.net", "/api/milkmans/1/100");
+      var uri = Uri.https("us-central1-cuentalecherita.cloudfunctions.net",
+          "/api/milkmans/1/100");
       final resp = await http.get(uri);
       if (resp.body.isEmpty) return items;
       List<dynamic> jsonList = json.decode(resp.body);
@@ -21,14 +25,13 @@ class MilkmanService {
       return items;
     }
   }
-
-  Future<dynamic> sendMilkman(Milkman milkman) async {
+ Future<dynamic> sendPacient(Milkman milkman) async {
     try {
       final Map<String, String> _headers = {"content-type": "application/json"};
       var uri =
-          Uri.https( "us-central1-cuentalecherita.cloudfunctions.net", "/api/milkmans");
- 
-      final resp = await http.post(uri, headers: _headers, body:   milkmanToJson(milkman));
+          Uri.https("us-central1-cuentalecherita.cloudfunctions.net","/api/milkmans");
+      String pacientJson = milkmanToJson(milkman);
+      final resp = await http.post(uri, headers: _headers, body: pacientJson);
       if (resp.body.isEmpty) return null;
       return json.decode(resp.body);
     } on Exception catch (e) {
@@ -37,6 +40,19 @@ class MilkmanService {
     }
   }
 
+  Future<String> uploadImage(File image) async {
+    final cloudinary = CloudinaryPublic('dzygpkghm', 'plm2cmac', cache: false);
+    try {
+      CloudinaryResponse response = await cloudinary.uploadFile(
+        CloudinaryFile.fromFile(image.path,
+            resourceType: CloudinaryResourceType.Image),
+      );
 
-
+      return response.secureUrl;
+    } on CloudinaryException catch (e) {
+      print(e.message);
+      print(e.request);
+      return "";
+    }
+  }
 }

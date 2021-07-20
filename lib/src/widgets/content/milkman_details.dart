@@ -65,7 +65,7 @@ _historial(){
 
           Expanded(
             child: SingleChildScrollView(
-                child: LiterMilkList(idmilkman: widget.milkman.idmilkman))),
+                child: LiterMilkList(idmilkman: widget.milkman.idmilkman.toString()))),
       Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14.0),
           child:  FloatingActionButton(
@@ -74,7 +74,7 @@ _historial(){
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          LiterMilkForm(idmilkman: widget.milkman.idmilkman),
+                          LiterMilkForm(idmilkman: widget.milkman.idmilkman.toString()),
                     ))
               },
               child: const Icon(Icons.add_chart_outlined),
@@ -91,7 +91,7 @@ _historial(){
       children: [ 
         Expanded(
             child: SingleChildScrollView(
-                child: PaymentList(idmilkman: widget.milkman.idmilkman))),
+                child: PaymentList(idmilkman: widget.milkman.idmilkman.toString()))),
                 Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14.0),
           child:  FloatingActionButton(

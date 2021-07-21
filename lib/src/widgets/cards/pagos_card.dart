@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tu_cuenta_lecherita/src/models/payment_models.dart';
 
 class PagosCard extends StatelessWidget {
-  const PagosCard({Key? key, required this.user}) : super(key: key);
-  final String user;
-
+  const PagosCard({Key? key, required this.payment}) : super(key: key);
+ 
+final Payment payment;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -14,9 +15,9 @@ class PagosCard extends StatelessWidget {
               side:new  BorderSide(color: Color(0xFFFF6A14)),  
               borderRadius: new BorderRadius.all(new Radius.circular(7))),
                child: ListTile(
-           leading: Image.asset("../assets/images/" + user + ".png"),
-          title: Text("Pagos ", style: TextStyle(color: Colors.white, fontSize: 20),),
-          subtitle: Text("30 Litros por pagar",style: TextStyle(color: Colors.white),),
+            
+          title: Text(payment.description.toString(), style: TextStyle(color: Colors.white, fontSize: 20),),
+          subtitle: Text("Valor a pagar: "+ " " + payment.total.toString() +" "+"Dolares" ,style: TextStyle(color: Colors.white),),
          ),
     );
   }

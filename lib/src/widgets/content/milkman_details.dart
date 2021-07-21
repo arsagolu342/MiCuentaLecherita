@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:tu_cuenta_lecherita/src/models/milkman_models-.dart';
 import 'package:tu_cuenta_lecherita/src/pages/literMilk_form.dart';
 import 'package:tu_cuenta_lecherita/src/widgets/List/literMilk_list.dart';
@@ -52,9 +54,25 @@ class _MilkmanDetailsWidgetState extends State<MilkmanDetailsWidget>
   }
 
   _detail() {
-    return Column(
-      
-    );
+    return  Container(
+color: Colors.blue[100],      
+      margin: EdgeInsets.all(14.0),
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+             detalles(context, "Nombre",
+                widget.milkman.nombre.toString(), Icons.perm_identity_outlined),
+             detalles( context, "Apellido",
+                widget.milkman.apellido.toString(), Icons.perm_identity),
+            detalles( context, "Numero de Cédula",
+                widget.milkman.ci.toString(), Icons.format_list_numbered_outlined),
+                detalles( context, "Dirección",
+                widget.milkman.direccion.toString(), Icons.streetview_outlined),
+          ],
+        ),
+      ),
+      );
   }
 _historial(){
 
@@ -100,6 +118,21 @@ _historial(){
               ),
         ),
       ],
+    );
+  }
+
+  detalles(
+      BuildContext context, String title, String subtitle, IconData icon) {
+    return Expanded(
+      child: SingleChildScrollView(
+        child: ListTile(
+          leading: Icon(icon    
+         
+          ),
+          title: Text(title, style:TextStyle(color: Colors.blue[900])),
+          subtitle: Text(subtitle, style:TextStyle(color: Colors.blue)),
+        ),
+      ),
     );
   }
 }

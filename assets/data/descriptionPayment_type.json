@@ -1,0 +1,13 @@
+[{
+        "name": "Pago Completo",
+        "description": "Los valores a pagar fueron entregados son ninguna novedad "
+    },
+    {
+        "name": "Adelanto",
+        "description": "Se a dado una parte del total de pago."
+    },
+    {
+        "name": "No recolectado",
+        "description": "No se recolecto los litros de leche porque se presentan problemas."
+    }
+]

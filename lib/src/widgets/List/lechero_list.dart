@@ -12,7 +12,7 @@ class LecherosList extends StatefulWidget {
 
 class _LecherosListState extends State<LecherosList> {
   final MilkmanService _service = MilkmanService();
-  List<Milkman> _milkman = [];
+  List<Milkman>? _milkman = null;
 
   @override
   void initState() {
@@ -21,22 +21,15 @@ class _LecherosListState extends State<LecherosList> {
   }
 
   Widget build(BuildContext context) {
-    return _milkman.length == 0
-        ? Container(
-            height: 400,
-            child: Center(
-              child: Text(
-                'Recolectando la Informacion....',
-                textAlign: TextAlign.start,
-                style: TextStyle(color: Colors.blue[900], fontSize: 15),
-              ),
-            ),
-          )
+    return _milkman == null
+        ? reload(" Descargando la información..."):
+    _milkman!.length == 0
+      ?  reload(" No hay Lecheros registrados")
         : Padding(
           padding:  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 14.0),
           child: Column(
               mainAxisSize: MainAxisSize.min,
-              children: _milkman.map((e) => LecheroCard(milkman: e)).toList(),
+              children: _milkman!.map((e) => LecheroCard(milkman: e)).toList(),
             ),
         );
   }
@@ -47,4 +40,33 @@ class _LecherosListState extends State<LecherosList> {
       setState(() {});
     });
   }
+
+reload(  String message,) {
+    return Container(
+      margin: EdgeInsets.all(14.0),
+      child: Center(
+        child: Card(
+            margin: EdgeInsets.all(14.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                 Image.asset("../assets/images/carga.jpg"),
+                    Container(
+                  margin: EdgeInsets.all(20.0),
+                  child: Text(message,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.subtitle1),
+                ),           
+                    
+              ],
+            )),
+      ),
+    );
+  }
+
+
+
+
+
 }

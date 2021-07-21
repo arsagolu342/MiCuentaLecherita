@@ -3,7 +3,7 @@ import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:tu_cuenta_lecherita/src/models/description_model.dart';
 import 'package:tu_cuenta_lecherita/src/models/liter_milk_models.dart';
 import 'package:tu_cuenta_lecherita/src/services/description_type_service.dart';
-import 'package:tu_cuenta_lecherita/src/services/literMik_services.dart';    
+import 'package:tu_cuenta_lecherita/src/services/literMik_services.dart';
 
 class LiterMilkForm extends StatefulWidget {
   LiterMilkForm({Key? key, required this.idmilkman}) : super(key: key);
@@ -30,30 +30,52 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
   void initState() {
     super.initState();
     _loadTypeTreatments();
-    _literMilk = LiterMilk.create( _selectedDate , "" , widget.idmilkman, "Litros completos");}
+    _literMilk = LiterMilk.create(
+        _selectedDate, "", widget.idmilkman, "Litros completos");
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-         
-        body: SingleChildScrollView(
-          child: Stack(
-            alignment: AlignmentDirectional.topCenter,
-            children: [
-            
-              Column(
-                children: [
-                  SizedBox(height: 35.0),
-                
-              
-                  _form()
-                ],
-              )
-            ],
-          ),
-        ));
-  }
+        body: Container(
 
+          child: CustomPaint(
+             painter: FondoPaint1(),
+          child: SingleChildScrollView(
+      child: Stack(
+          alignment: AlignmentDirectional.topCenter,
+          children: [
+
+            Center(
+            child :Padding(
+          padding: const EdgeInsets.symmetric(vertical: 90.0),
+              child: Column(
+                children: [SizedBox(height: 35.0), _form(),_back()],
+              ),
+            ),)
+          ],
+      ),
+    ),
+        ),),);
+  }
+ _back(){
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 70.0),
+      child: ElevatedButton(
+
+ onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Column(
+                         mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(Icons.arrow_back_ios_new_outlined),
+                        ],
+                      ),
+
+      ),
+    );
+  }
   _form() {
     final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
@@ -74,7 +96,7 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
                       EdgeInsets.symmetric(vertical: 32.0, horizontal: 14.0),
                   child: Column(
                     children: [
-                      _inputType(),
+                      _inputType(), 
                       _inputSubtotal(),
                       _inputFecha(),
                       _buttons()
@@ -93,11 +115,12 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
         onSaved: (value) {
           //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
           _literMilk.subtotalLiter = value.toString();
-        }, 
+        },
         decoration: InputDecoration(labelText: "Litros del día"),
-        maxLength: 255,
-        maxLines: 4);
+        maxLength: 10,
+        );
   }
+ 
 
   _inputType() {
     return DropdownButton<String>(
@@ -129,7 +152,8 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Fecha de entrega", style: Theme.of(context).textTheme.subtitle1),
+          Text("Fecha de entrega",
+              style: Theme.of(context).textTheme.subtitle1),
           DatePickerWidget(
             looping: false, // default is not looping
             dateFormat: "yyyy-MMMM-dd",
@@ -163,8 +187,7 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
                 _onSaving = true;
                 setState(() {});
               },
-              child: Icon(Icons.save),
-             
+               child: const Text('Guardar'),
             ),
           );
   }
@@ -188,4 +211,44 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
       setState(() {});
     });
   }
+
+  
 }
+class FondoPaint1 extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    curva1(canvas, size);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
+  }
+
+  void curva1(Canvas canvas, Size size) {
+    final paint = Paint();
+
+    paint.color = Color(0xFF0059FD);
+    paint.style = PaintingStyle
+        .fill; // .stroke es para dibujar una linea y  .fill es para pintar todo
+    paint.strokeWidth = 10.0;
+
+    final path = new Path();
+
+    /*
+    (0,0)-(0,size.heigth)-(size.width,size.heigth)-(size.width,0)
+     */
+
+    path.lineTo(0, size.height * 0.5);
+    path.quadraticBezierTo(size.width * 0.2, size.height * 0.17,
+        size.width * 0.5, size.height * 0.2);
+    path.quadraticBezierTo(
+        size.width * 0.85, size.height * 0.27, size.width, size.height * 0.25);
+    path.lineTo(size.width, 0);
+    path.lineTo(0, 0);
+
+    path.moveTo(0, size.height * 0.9); //salto del pincel o lapiz
+     
+
+    canvas.drawPath(path, paint); //esto es lo que permite que se dibuje todo
+  }}

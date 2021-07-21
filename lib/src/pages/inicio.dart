@@ -56,7 +56,7 @@ class _InicioState extends State<Inicio> {
             ListTile(
               title: Text("Tu Cuenta Lecherita",
                   textAlign: TextAlign.center,
-                  style: TextStyle(height:7, color: Colors.black, fontSize: 40),
+                  style: TextStyle(height:7, color: Colors.black, fontSize: 30),
                 ),
     
          

@@ -12,7 +12,7 @@ class LecherosList extends StatefulWidget {
 
 class _LecherosListState extends State<LecherosList> {
   final MilkmanService _service = MilkmanService();
-  List<Milkman>? _milkman = null;
+  List<Milkman>? _milkman ;
 
   @override
   void initState() {

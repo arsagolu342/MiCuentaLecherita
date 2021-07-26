@@ -7,7 +7,8 @@
           "description": "Los Litros entregados estan con alguna novedad."
       },
       {
-          "name": "No pagado",
-          "description": "No se ha pagado ninguna cantidad."
+
+          "name": "No recolectados",
+          "description": "No se recolecto los litros de leche porque se presentan problemas."
       }
   ]

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tu_cuenta_lecherita/src/models/milkman_models-.dart';
 import 'package:tu_cuenta_lecherita/src/pages/literMilk_form.dart';
-import 'package:tu_cuenta_lecherita/src/widgets/List/literMilk_list.dart';
-import 'package:tu_cuenta_lecherita/src/widgets/List/pagos_list.dart'; 
+import 'package:tu_cuenta_lecherita/src/pages/payment_form.dart';
+import 'package:tu_cuenta_lecherita/src/widgets/List/literMilk_list.dart'; 
+import 'package:tu_cuenta_lecherita/src/widgets/List/paymentList.dart'; 
 
 
 class MilkmanDetailsWidget extends StatefulWidget {
@@ -105,19 +106,31 @@ _historial(){
 }
   _payments() {
    
-    return Column(
-      children: [ 
-        Expanded(
+     return Column(
+
+     
+      children: [
+
+          Expanded(
             child: SingleChildScrollView(
-                child: PaymentList(idmilkman: widget.milkman.idmilkman.toString()))),
-                Padding(
+                child: PayList(idmilkman: widget.milkman.idmilkman.toString()))),
+      Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14.0),
           child:  FloatingActionButton(
-              onPressed: () => {},
-              child: const Icon(Icons.payment_outlined),
+              onPressed: () => {
+                 Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          PaymentForm(idmilkman: widget.milkman.idmilkman.toString()),
+                    ))
+              },
+              child: const Icon(Icons.add_chart_outlined),
               ),
         ),
       ],
+
+      
     );
   }
 

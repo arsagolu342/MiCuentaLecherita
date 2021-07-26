@@ -1,37 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
-import 'package:tu_cuenta_lecherita/src/models/description_model.dart';
-import 'package:tu_cuenta_lecherita/src/models/liter_milk_models.dart';
-import 'package:tu_cuenta_lecherita/src/services/description_type_service.dart'; 
-import 'package:tu_cuenta_lecherita/src/services/literMik_services.dart';
+import 'package:tu_cuenta_lecherita/src/models/description_Payment_model.dart';  
+import 'package:tu_cuenta_lecherita/src/models/payment_models.dart';
+import 'package:tu_cuenta_lecherita/src/services/descriptionPayment_type.dart';  
+import 'package:tu_cuenta_lecherita/src/services/payment_services.dart';
 
-class LiterMilkForm extends StatefulWidget {
-  LiterMilkForm({Key? key, required this.idmilkman}) : super(key: key);
+class PaymentForm extends StatefulWidget {
+  PaymentForm({Key? key, required this.idmilkman}) : super(key: key);
   final String idmilkman;
 
   @override
-  _LiterMilkFormState createState() => _LiterMilkFormState();
+  _PaymentFormState createState() => _PaymentFormState();
 }
 
-class _LiterMilkFormState extends State<LiterMilkForm> {
+class _PaymentFormState extends State<PaymentForm> {
   //Clave para vincular el Formulario (Form)
   final formKey = GlobalKey<FormState>();
 
-  DescriptionTypeService _serviceTypeDescription = new DescriptionTypeService();
-  LiterMilkService _literMilkservice = new LiterMilkService();
-  List<Description> _types = [];
+  TypeService _serviceTypeDescription = new TypeService();
+  PaymentService _paymentService = new PaymentService();
+  List<DescriptionPayment> _types = [];
   DateTime _selectedDate = DateTime.now();
 
   //Un objeto del modelo a enviar
-  late LiterMilk _literMilk;
+  late Payment _payment;
   bool _onSaving = false;
 
   @override
   void initState() {
     super.initState();
     _loadTypeTreatments();
-    _literMilk = LiterMilk.create(
-        _selectedDate, "", widget.idmilkman, "Litros completos");
+    _payment = Payment.create(
+
+        _selectedDate, "","", widget.idmilkman, "Pago Completo");
   }
 
   @override
@@ -97,7 +98,8 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
                   child: Column(
                     children: [
                       _inputType(), 
-                      _inputSubtotal(),
+                      _inputTotal(),
+                      _inputSubTotal(),
                       _inputFecha(),
                       _buttons()
                     ],
@@ -109,14 +111,25 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
     );
   }
 
-  _inputSubtotal() {
+  _inputTotal() {
     return TextFormField(
-        initialValue: _literMilk.subtotalLiter,
+        initialValue: _payment.total,
         onSaved: (value) {
           //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
-          _literMilk.subtotalLiter = value.toString();
+          _payment.total = value.toString();
         },
-        decoration: InputDecoration(labelText: "Litros del día"),
+        decoration: InputDecoration(labelText: "Valor a pagar"),
+        maxLength: 10,
+        );
+  }
+   _inputSubTotal() {
+    return TextFormField(
+        initialValue: _payment.subtotal,
+        onSaved: (value) {
+          //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
+          _payment.subtotal = value.toString();
+        },
+        decoration: InputDecoration(labelText: "Valor a pagar"),
         maxLength: 10,
         );
   }
@@ -124,7 +137,7 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
 
   _inputType() {
     return DropdownButton<String>(
-      value: _literMilk.description,
+      value: _payment.description,
       icon: const Icon(Icons.expand_more),
       iconSize: 24,
       elevation: 16,
@@ -135,13 +148,13 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
       ),
       onChanged: (String? newValue) {
         setState(() {
-          _literMilk.description = newValue!;
+          _payment.description = newValue!;
         });
       },
-      items: _types.map<DropdownMenuItem<String>>((Description value) {
+      items: _types.map<DropdownMenuItem<String>>((DescriptionPayment value) {
         return DropdownMenuItem<String>(
-          value: value.name,
-          child: Text(value.name),
+          value: value.nombre,
+          child: Text(value.nombre),
         );
       }).toList(),
     );
@@ -160,7 +173,7 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
             locale: DatePicker.localeFromString('es'),
             onChange: (DateTime newDate, _) {
               _selectedDate = newDate;
-              _literMilk.fechaEntrega = _selectedDate;
+              _payment.fechaPago = _selectedDate;
             },
             pickerTheme: DateTimePickerTheme(
               backgroundColor: Theme.of(context).canvasColor,
@@ -199,7 +212,7 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
     formKey.currentState!.save();
 
     //Llamamos al servicio para guardar el reporte
-    _literMilkservice.sendLiterMilk(_literMilk).then((value) {
+    _paymentService.sendPayment(_payment).then((value) {
       formKey.currentState!.reset();
       Navigator.pop(context);
     });

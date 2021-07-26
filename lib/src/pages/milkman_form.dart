@@ -265,7 +265,7 @@ class _MilkmanFormState extends State<MilkmanForm> {
   }
 
   Future _selectImage(ImageSource source) async {
-    final pickedFile = await _picker.getImage(source: source);
+    final pickedFile = await _picker.pickImage(source: source);
     if (pickedFile != null) {
       _image = File(pickedFile.path);
       _imageSelected = true;

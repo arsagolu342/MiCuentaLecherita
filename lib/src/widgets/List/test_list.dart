@@ -12,7 +12,7 @@ class PaymentList extends StatefulWidget {
 
 class _PaymentListState extends State<PaymentList> {
   final PaymentService _service = PaymentService();
-  List<Payment>? _payment = null;
+  List<Payment>? _payment = [];
 
   @override
   void initState() {
@@ -21,10 +21,10 @@ class _PaymentListState extends State<PaymentList> {
   }
 
   Widget build(BuildContext context) {
-    return _payment == null
+    return _payment == []
         ? reload(" Descargando la información..."):
     _payment!.length == 0
-      ?  reload(" No hay Lecheros registrados")
+      ?  reload(" No hay Pagos registrados")
         : Padding(
           padding:  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 14.0),
           child: Column(

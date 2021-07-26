@@ -40,9 +40,9 @@ class MilkmanService {
     }
   }
 
-  Future<String> uploadImage(File image) async {
-    final cloudinary = CloudinaryPublic('dzygpkghm', 'plm2cmac', cache: false);
-    try {
+    Future<String> uploadImage(File image) async {
+   final cloudinary = CloudinaryPublic('dzygpkghm', 'xmax0xkg', cache: false);
+   try {
       CloudinaryResponse response = await cloudinary.uploadFile(
         CloudinaryFile.fromFile(image.path,
             resourceType: CloudinaryResourceType.Image),

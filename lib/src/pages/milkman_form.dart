@@ -242,7 +242,7 @@ class _MilkmanFormState extends State<MilkmanForm> {
     });
   }
 
-  _showImage() {
+_showImage() {
     return Container(
       width: 100.0,
       height: 100.0,

@@ -10,7 +10,7 @@ class Milkman {
       required this.apellido,
       required this.ci,
       required this.direccion,
-      required this.photo,
+      this.photo,
            });
 Milkman.create(this.nombre, this.apellido, this.ci,this.direccion );
 
@@ -19,7 +19,7 @@ Milkman.create(this.nombre, this.apellido, this.ci,this.direccion );
   String apellido;
   String ci;
   String direccion;
-  String?  photo;
+  String? photo;
   getNombre() {
     return nombre + " " + apellido;
   }

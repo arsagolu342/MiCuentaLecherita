@@ -9,17 +9,17 @@ class Payment {
   Payment({
     
     required this.fechaPago,
-    required this.subtotal,
+     this.subtotal,
     required this.total,
     required this.idmilkman,
     required this.description,
     //si el estado =1 todo, mantienen el valor total, pero si el 0 si=0 y me borra los pago 
   });
 
-   Payment.create(this.fechaPago, this.subtotal, this.total,this.idmilkman, this.description);
+   Payment.create(this.fechaPago, this.total,this.idmilkman, this.description);
 
   DateTime fechaPago;
-  String subtotal;
+  String? subtotal;
   String total;
   String idmilkman;
   String description;

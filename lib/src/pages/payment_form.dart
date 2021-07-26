@@ -32,7 +32,7 @@ class _PaymentFormState extends State<PaymentForm> {
     _loadTypeTreatments();
     _payment = Payment.create(
 
-        _selectedDate, "","", widget.idmilkman, "Pago Completo");
+        _selectedDate, "", widget.idmilkman, "Pago Completo");
   }
 
   @override
@@ -99,7 +99,6 @@ class _PaymentFormState extends State<PaymentForm> {
                     children: [
                       _inputType(), 
                       _inputTotal(),
-                      _inputSubTotal(),
                       _inputFecha(),
                       _buttons()
                     ],
@@ -122,18 +121,7 @@ class _PaymentFormState extends State<PaymentForm> {
         maxLength: 10,
         );
   }
-   _inputSubTotal() {
-    return TextFormField(
-        initialValue: _payment.subtotal,
-        onSaved: (value) {
-          //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
-          _payment.subtotal = value.toString();
-        },
-        decoration: InputDecoration(labelText: "Valor a pagar"),
-        maxLength: 10,
-        );
-  }
- 
+
 
   _inputType() {
     return DropdownButton<String>(

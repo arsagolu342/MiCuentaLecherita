@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart'; 
-import 'package:tu_cuenta_lecherita/src/models/payment_models.dart'; 
-import 'package:tu_cuenta_lecherita/src/services/payment_services.dart'; 
+import 'package:flutter/material.dart';
+import 'package:tu_cuenta_lecherita/src/models/payment_models.dart';
+import 'package:tu_cuenta_lecherita/src/services/payment_services.dart';
 import 'package:tu_cuenta_lecherita/src/widgets/cards/pagos_card.dart';
 
 class PaymentList extends StatefulWidget {
@@ -12,7 +12,7 @@ class PaymentList extends StatefulWidget {
 
 class _PaymentListState extends State<PaymentList> {
   final PaymentService _service = PaymentService();
-  List<Payment>? _payment = [];
+  List<Payment>? _milkman ;
 
   @override
   void initState() {
@@ -21,22 +21,22 @@ class _PaymentListState extends State<PaymentList> {
   }
 
   Widget build(BuildContext context) {
-    return _payment == []
+    return _milkman == null
         ? reload(" Descargando la información..."):
-    _payment!.length == 0
-      ?  reload(" No hay Pagos registrados")
+    _milkman!.length == 0
+      ?  reload(" No hay Lecheros registrados")
         : Padding(
           padding:  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 14.0),
           child: Column(
               mainAxisSize: MainAxisSize.min,
-              children: _payment!.map((e) =>  PagosCard(payment: e)).toList(),
+              children: _milkman!.map((e) => PagosCard(payment: e)).toList(),
             ),
         );
   }
 
   _loadPacients() {
-    _service.getPaymentList().then((value) {
-      _payment = value;
+    _service.getMilkmans().then((value) {
+      _milkman = value;
       setState(() {});
     });
   }
@@ -64,41 +64,4 @@ reload(  String message,) {
       ),
     );
   }
-
-
-
-
-
 }
-
-
-
-// import 'package:flutter/material.dart';
-// import 'package:tu_cuenta_lecherita/src/widgets/cards/pagos_card.dart';
- 
-// class PagosList extends StatelessWidget {
-//   const PagosList({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-      
-//       children: [
-//         PagosCard(user: "user"),
-//         PagosCard(user: "user"),
-//         PagosCard(user: "user"),
-//         PagosCard(user: "user"),
-//         PagosCard(user: "user"),
-//         PagosCard(user: "user"),
-//         PagosCard(user: "user"),
-//         PagosCard(user: "user"),
-//         PagosCard(user: "user"),
-//         PagosCard(user: "user"),
-//         PagosCard(user: "user"),
-//         PagosCard(user: "user"),
-//         PagosCard(user: "user"),
-//         PagosCard(user: "user"),
-//       ],
-//     );
-//   }
-// }

@@ -51,7 +51,7 @@ reload(  String message,) {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                 Image.asset("../assets/images/carga.jpg"),
+                 Image.asset("../assets/images/leche.jpg"),
                     Container(
                   margin: EdgeInsets.all(20.0),
                   child: Text(message,

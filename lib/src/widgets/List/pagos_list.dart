@@ -74,7 +74,7 @@ class _PaymentListState extends State<PaymentList> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                 Image.asset("../assets/images/carga.jpg"),
+                 Image.asset("../assets/images/pay.png"),
                     Container(
                   margin: EdgeInsets.all(20.0),
                   child: Text(message,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:tu_cuenta_lecherita/src/models/description_model.dart';
 import 'package:tu_cuenta_lecherita/src/models/liter_milk_models.dart';
-import 'package:tu_cuenta_lecherita/src/services/description_type_service.dart'; 
+import 'package:tu_cuenta_lecherita/src/services/description_type_service.dart';
 import 'package:tu_cuenta_lecherita/src/services/literMik_services.dart';
 
 class LiterMilkForm extends StatefulWidget {
@@ -37,45 +37,46 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-
-          child: CustomPaint(
-             painter: FondoPaint1(),
+      body: Container(
+        child: CustomPaint(
+          painter: FondoPaint1(),
           child: SingleChildScrollView(
-      child: Stack(
-          alignment: AlignmentDirectional.topCenter,
-          children: [
-
-            Center(
-            child :Padding(
-          padding: const EdgeInsets.symmetric(vertical: 90.0),
-              child: Column(
-                children: [SizedBox(height: 35.0), _form(),_back()],
-              ),
-            ),)
-          ],
-      ),
-    ),
-        ),),);
-  }
- _back(){
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 70.0),
-      child: ElevatedButton(
-
- onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Column(
-                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Icon(Icons.arrow_back_ios_new_outlined),
-                        ],
-                      ),
-
+            child: Stack(
+              alignment: AlignmentDirectional.topCenter,
+              children: [
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 90.0),
+                    child: Column(
+                      children: [SizedBox(height: 35.0), _form(), _back()],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
+
+  _back() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 70.0),
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Icon(Icons.arrow_back_ios_new_outlined),
+          ],
+        ),
+      ),
+    );
+  }
+
   _form() {
     final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
@@ -96,7 +97,7 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
                       EdgeInsets.symmetric(vertical: 32.0, horizontal: 14.0),
                   child: Column(
                     children: [
-                      _inputType(), 
+                      _inputType(),
                       _inputSubtotal(),
                       _inputFecha(),
                       _buttons()
@@ -111,16 +112,15 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
 
   _inputSubtotal() {
     return TextFormField(
-        initialValue: _literMilk.subtotalLiter,
-        onSaved: (value) {
-          //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
-          _literMilk.subtotalLiter = value.toString();
-        },
-        decoration: InputDecoration(labelText: "Litros del día"),
-        maxLength: 10,
-        );
+      initialValue: _literMilk.subtotalLiter,
+      onSaved: (value) {
+        //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
+        _literMilk.subtotalLiter = value.toString();
+      },
+      decoration: InputDecoration(labelText: "Litros del día"),
+      maxLength: 10,
+    );
   }
- 
 
   _inputType() {
     return DropdownButton<String>(
@@ -187,7 +187,7 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
                 _onSaving = true;
                 setState(() {});
               },
-               child: const Text('Guardar'),
+              child: const Text('Guardar'),
             ),
           );
   }
@@ -211,9 +211,8 @@ class _LiterMilkFormState extends State<LiterMilkForm> {
       setState(() {});
     });
   }
-
-  
 }
+
 class FondoPaint1 extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -248,7 +247,7 @@ class FondoPaint1 extends CustomPainter {
     path.lineTo(0, 0);
 
     path.moveTo(0, size.height * 0.9); //salto del pincel o lapiz
-     
 
     canvas.drawPath(path, paint); //esto es lo que permite que se dibuje todo
-  }}
+  }
+}

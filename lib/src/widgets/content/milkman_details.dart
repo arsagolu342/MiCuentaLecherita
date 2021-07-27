@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:tu_cuenta_lecherita/src/models/liter_milk_models.dart';
+import 'package:flutter/rendering.dart'; 
 import 'package:tu_cuenta_lecherita/src/models/milkman_models-.dart';
 import 'package:tu_cuenta_lecherita/src/pages/literMilk_form.dart';
-import 'package:tu_cuenta_lecherita/src/widgets/List/literMilk_list.dart';
-import 'package:tu_cuenta_lecherita/src/widgets/List/paymentList.dart';
-
-import 'package:tu_cuenta_lecherita/src/services/literMik_services.dart';
+import 'package:tu_cuenta_lecherita/src/widgets/List/literMilk_list.dart';  
 
 class MilkmanDetailsWidget extends StatefulWidget {
   const MilkmanDetailsWidget({Key? key, required this.milkman})
@@ -24,9 +20,8 @@ class _MilkmanDetailsWidgetState extends State<MilkmanDetailsWidget>
     Tab(text: 'Historial de Litros'),
     Tab(text: 'Pagos'),
   ];
-  LiterMilkService _literMilkservice = new LiterMilkService();
+
   late TabController _tabController;
-  List<LiterMilk>? _list;
   @override
   void initState() {
     super.initState();
@@ -111,26 +106,26 @@ class _MilkmanDetailsWidgetState extends State<MilkmanDetailsWidget>
 
   _payments() {
     return Column(
-      children: [
-        Expanded(
-            child: SingleChildScrollView(
-                child:
-                    PayList(idmilkman: widget.milkman.idmilkman.toString()))),
-        // Padding(
-        //     padding: const EdgeInsets.symmetric(horizontal: 14.0),
-        //     child:  FloatingActionButton(
-        //         onPressed: () => {
-        //            Navigator.push(
-        //               context,
-        //               MaterialPageRoute(
-        //                 builder: (context) =>
-        //                     PaymentForm(idmilkman: widget.milkman.idmilkman.toString()),
-        //               ))
-        //         },
-        //         child: const Icon(Icons.add_chart_outlined),
-        //         ),
-        //   ),
-      ],
+      // children: [
+      //   Expanded(
+      //       child: SingleChildScrollView(
+      //           child:
+      //               PayList(idmilkman: widget.milkman.idmilkman.toString()))),
+      //   // Padding(
+      //   //     padding: const EdgeInsets.symmetric(horizontal: 14.0),
+      //   //     child:  FloatingActionButton(
+      //   //         onPressed: () => {
+      //   //            Navigator.push(
+      //   //               context,
+      //   //               MaterialPageRoute(
+      //   //                 builder: (context) =>
+      //   //                     PaymentForm(idmilkman: widget.milkman.idmilkman.toString()),
+      //   //               ))
+      //   //         },
+      //   //         child: const Icon(Icons.add_chart_outlined),
+      //   //         ),
+      //   //   ),
+      // ],
     );
   }
 

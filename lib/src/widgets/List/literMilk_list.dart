@@ -50,12 +50,12 @@ class _LiterMilkListState extends State<LiterMilkList> {
                 
                     .map((e) => ListTile(
                           onTap: () => {},
-                          title: Text( " " + e.description.toString() ),
+                          title: Text( " " + e.description.toString(),style: TextStyle(color: Colors.white, fontSize: 15), ),
                           subtitle:
-                              Text("Fecha de la ultima recolección: " + " " +  e.fechaEntrega.toString()),
+                              Text("Fecha de la ultima recolección: " + " " +  e.fechaEntrega.toString(),style: TextStyle(color: Colors.white, fontSize: 15),),
                                leading: Container(
                                  
-                                  child: Text("Litros : " + " " +   e.subtotalLiter.toString()),
+                                  child: Text("Litros : " + " " +   e.subtotalLiter.toString(),style: TextStyle(color: Colors.blueGrey, fontSize: 15),),
                                        
                                ),
                               //   trailing: Column(
@@ -102,7 +102,7 @@ reload(  String message,) {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                 Image.asset("../assets/images/leche.jpg"),
+                 Image.asset("../assets/images/leche.jpg", width: 100,),
                     Container(
                   margin: EdgeInsets.all(20.0),
                   child: Text(message,

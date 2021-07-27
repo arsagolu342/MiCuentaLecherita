@@ -16,6 +16,9 @@ class _InicioState extends State<Inicio> {
     return Scaffold(
       body: Container(
         child: Stack(
+
+
+          
           children: <Widget>[
             Container(
               child: Container(
@@ -25,45 +28,38 @@ class _InicioState extends State<Inicio> {
                   painter: FondoPaint1(),
                 ),
               ),
-            ), Center(
+            ),
+            Center(
               child: Image(
                 image: AssetImage('../assets/images/vaca.png'),
                 height: 300,
               ),
             ),
-            SizedBox(
-            
-            
-                  child: FloatingActionButton(
- 
-                    onPressed: () {
-                      
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MainPage(titulo: 'Inicio')),
-                      );
-                    },
-                    child: const Icon(Icons.arrow_forward_ios_outlined),
-                    
-                  ),
-                              
-
-                  height: 900,
-              
-            ),
-            
+          
             ListTile(
-              title: Text("Tu Cuenta Lecherita",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(height:7, color: Colors.black, fontSize: 30),
-                ),
-    
-         
-
- 
-              
+              title: Text(
+                "Tu Cuenta Lecherita",
+                textAlign: TextAlign.center,
+                style: TextStyle(height: 7, color: Colors.black,fontFamily: "Trajan Pro", fontSize: 35),
+              ),
             ),
+
+              Container(
+               alignment:Alignment.centerRight,
+                child: SizedBox(
+                child: FloatingActionButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MainPage(titulo: 'Inicio')),
+                    );
+                  },
+                  child: const Icon(Icons.arrow_forward_ios_outlined),
+                ),
+                height: 900,
+            ),
+              ),
           ],
         ),
       ),

@@ -30,9 +30,9 @@ class _PaymentFormState extends State<PaymentForm> {
   void initState() {
     super.initState();
     _loadTypeTreatments();
-    _payment = Payment.create(
+    // _payment = Payment.create(
 
-        _selectedDate, "", widget.idmilkman, "Pago Completo");
+    //     _selectedDate, "","" , "Pago Completo");
   }
 
   @override

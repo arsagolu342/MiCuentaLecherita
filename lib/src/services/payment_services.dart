@@ -17,7 +17,7 @@ class PaymentService {
       if (resp.body.isEmpty) return items;
       List<dynamic> jsonList = json.decode(resp.body);
       for (var item in jsonList) {
-        final payment = new Payment .fromJson(item);
+        final payment = new Payment.fromJson(item);
         items.add(payment);
       }
       return items;

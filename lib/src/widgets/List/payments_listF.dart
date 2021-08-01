@@ -1,20 +1,20 @@
-import 'package:flutter/material.dart';   
+import 'package:flutter/material.dart'; 
 import 'package:tu_cuenta_lecherita/src/models/payment_models.dart'; 
 import 'package:tu_cuenta_lecherita/src/services/payment_services.dart';
  
 
 
-class PayList extends StatefulWidget {
-  PayList({Key? key, required this.idmilkman}) : super(key: key);
+class PayFormList extends StatefulWidget {
+  PayFormList({Key? key, required this.idmilkman}) : super(key: key);
   final String idmilkman;
 
   @override
-  _PayListState createState() => _PayListState();
+  _PayFormListState createState() => _PayFormListState();
 }
 
-class _PayListState extends State<PayList> {
+class _PayFormListState extends State<PayFormList> {
   PaymentService _service = new PaymentService();
-  List<Payment>? _liter = [];
+  List<Payment>? _pay = [];
 
   @override
   void initState() {
@@ -24,10 +24,10 @@ class _PayListState extends State<PayList> {
 
   @override
   Widget build(BuildContext context) {
-    return _liter == null
+    return _pay == null
         ? reload(" Descargando la información..."):
-        _liter!.length == 0
-      ?  reload(" No hay Pagos registrados")
+        _pay!.length == 0
+      ?  reload(" No hay Litros registrados")
     : Card(
       color:  Color(0xFF04B8FF),
       shape: RoundedRectangleBorder(
@@ -35,7 +35,7 @@ class _PayListState extends State<PayList> {
               side:new  BorderSide(color: Color(0xFFFF6A14)),  
               borderRadius: new BorderRadius.all(new Radius.circular(7))), 
                
-                  child: _liter!.length == 0
+                  child: _pay!.length == 0
           ? Container(
              height: 400,
             child: Center(child: Text('Recolectando la Informacion....', textAlign: TextAlign.start, style: TextStyle(color: Colors.blue[900], fontSize: 15),),),
@@ -46,30 +46,18 @@ class _PayListState extends State<PayList> {
             child: Column(
                 
                 
-                children: _liter!
+                children: _pay!
                 
                     .map((e) => ListTile(
                           onTap: () => {},
-                          title: Text( " " + e.description.toString() ),
+                          title: Text( " " + e.description.toString(),style: TextStyle(color: Colors.white, fontSize: 15), ),
                           subtitle:
-                              Text("Fecha de la ultima recolección: " + " " +  e.fechaPago.toString()),
+                              Text("Fecha de pago: " + " " +  e.fechaPago.toString(),style: TextStyle(color: Colors.white, fontSize: 15),),
                                leading: Container(
                                  
-                                  child: Text("Litros : " + " " +   e.total.toString()),
+                                  child: Text("Pago : " + " " +   e.subtotal.toString(),style: TextStyle(color: Colors.blueGrey, fontSize: 15),),
                                        
-                               ),
-                              //   trailing: Column(
-                              //  children: [
-                              //      Container(
-                              //     child: Card(
-                              //         color:  Color(0xFF94E1FF),
-                              //         child:  Text("Total de litros:" + " "+ e.totalLiter.toString())
-                                        
-                              //     ),
-                              //   ),
-
-                              //  ],
-                              // ),
+                               )
 
                         ))
                         
@@ -88,11 +76,12 @@ class _PayListState extends State<PayList> {
 
   _loadTreatments() {
     _service.getPayment(widget.idmilkman).then((value) {
-      _liter = value;
+      _pay = value;
       setState(() {});
     });
   }
-reload(  String message,) {
+
+  reload(  String message,) {
     return Container(
       margin: EdgeInsets.all(14.0),
       child: Center(
@@ -109,11 +98,10 @@ reload(  String message,) {
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.subtitle1),
                 ),           
-                    
+
               ],
             )),
       ),
     );
-  }
-
+    }
 }

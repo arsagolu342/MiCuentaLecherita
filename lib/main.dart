@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
+
       home:Inicio(),    
      // home:Ma5inPage(titulo: 'Inicio'),
       title: 'Tu Cuenta Lecherita',      

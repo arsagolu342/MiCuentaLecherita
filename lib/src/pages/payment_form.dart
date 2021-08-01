@@ -30,9 +30,7 @@ class _PaymentFormState extends State<PaymentForm> {
   void initState() {
     super.initState();
     _loadTypeTreatments();
-    // _payment = Payment.create(
-
-    //     _selectedDate, "","" , "Pago Completo");
+    _payment = Payment.create(_selectedDate, widget.idmilkman,"" ,"","Pago Completo");
   }
 
   @override
@@ -98,6 +96,7 @@ class _PaymentFormState extends State<PaymentForm> {
                   child: Column(
                     children: [
                       _inputType(), 
+                      _inputsubTotal(),
                       _inputTotal(),
                       _inputFecha(),
                       _buttons()
@@ -110,7 +109,18 @@ class _PaymentFormState extends State<PaymentForm> {
     );
   }
 
-  _inputTotal() {
+  _inputsubTotal() {
+    return TextFormField(
+        initialValue: _payment.subtotal,
+        onSaved: (value) {
+          //Este evento se ejecuta cuando se cumple la validación y cambia el estado del Form
+          _payment.subtotal = value.toString();
+        },
+        decoration: InputDecoration(labelText: "Valor a pagar"),
+        maxLength: 10,
+        );
+  }
+    _inputTotal() {
     return TextFormField(
         initialValue: _payment.total,
         onSaved: (value) {
@@ -121,6 +131,7 @@ class _PaymentFormState extends State<PaymentForm> {
         maxLength: 10,
         );
   }
+
 
 
   _inputType() {
@@ -147,20 +158,19 @@ class _PaymentFormState extends State<PaymentForm> {
       }).toList(),
     );
   }
-
   _inputFecha() {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Fecha de entrega",
+          Text("Fecha de Pago",
               style: Theme.of(context).textTheme.subtitle1),
           DatePickerWidget(
             looping: false, // default is not looping
             dateFormat: "yyyy-MMMM-dd",
             locale: DatePicker.localeFromString('es'),
             onChange: (DateTime newDate, _) {
-              _selectedDate = newDate;
+              _selectedDate =  newDate;
               _payment.fechaPago = _selectedDate;
             },
             pickerTheme: DateTimePickerTheme(

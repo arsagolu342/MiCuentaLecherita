@@ -8,7 +8,7 @@ class LiterMilk {
   LiterMilk(
       {required this.fechaEntrega,
       required this.subtotalLiter,
-      this.totalLiter,
+       this.totalLiter,
       required this.idmilkman,
       required this.description});
 

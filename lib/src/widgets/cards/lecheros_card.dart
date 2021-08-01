@@ -28,7 +28,7 @@ final Milkman milkman;
         ),
          leading: ClipOval(
 child: milkman.photo == null
-                  ? Image.asset("../assets/images/user.png")
+                  ? Image.asset("assets/images/user.png")
                   : Image.network(milkman.photo.toString())),
          ),
      

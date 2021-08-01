@@ -91,7 +91,7 @@ class _PayFormListState extends State<PayFormList> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                 Image.asset("../assets/images/pay.png"),
+                 Image.asset("assets/images/pay.png",width: 100),
                     Container(
                   margin: EdgeInsets.all(20.0),
                   child: Text(message,

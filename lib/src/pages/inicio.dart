@@ -31,7 +31,7 @@ class _InicioState extends State<Inicio> {
             ),
             Center(
               child: Image(
-                image: AssetImage('../assets/images/vaca.png'),
+                image: AssetImage('assets/images/vaca.png'),
                 height: 300,
               ),
             ),

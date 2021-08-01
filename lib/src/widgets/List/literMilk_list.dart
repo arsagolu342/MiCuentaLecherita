@@ -102,7 +102,7 @@ reload(  String message,) {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                 Image.asset("../assets/images/leche.jpg", width: 100,),
+                 Image.asset("assets/images/leche.jpg", width: 100,),
                     Container(
                   margin: EdgeInsets.all(20.0),
                   child: Text(message,

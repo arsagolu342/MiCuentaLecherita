@@ -217,8 +217,7 @@ class _MilkmanFormState extends State<MilkmanForm> {
             child: ElevatedButton(
               onPressed: () {
                 _sendForm();
-                _onSaving = true;
-                setState(() {});
+              
               },
               child: const Text('Guardar'),
             ),
@@ -227,7 +226,8 @@ class _MilkmanFormState extends State<MilkmanForm> {
 
   _sendForm() async {
     if (!formKey.currentState!.validate()) return;
-
+  _onSaving = true;
+                setState(() {});
     //Vincula el valor de las controles del formulario a los atributos del modelo
     formKey.currentState!.save();
 

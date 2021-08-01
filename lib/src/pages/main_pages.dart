@@ -36,13 +36,14 @@ class _MainPageState extends State<MainPage> {
                   child: const Icon(Icons.add),
                 ),
            
-
+                
 
               
           )
-
-            
+  
           : null,
+          
+          
       body: Container(
 
         
@@ -64,7 +65,7 @@ class _MainPageState extends State<MainPage> {
                       fontFamily: 'VT323'),
                 ),
                 Container (
-                  height: 600.0,
+                  height: 795.0,
                   margin: EdgeInsets.symmetric(horizontal: 14.0),
                   child: Container(
                     child: contentWidget[_selectedIndex],

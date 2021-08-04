@@ -161,13 +161,12 @@ class _NoteFormState extends State<NoteForm> {
     setState(() {});
 
     formKey.currentState!.save();
-
-    final fisioProvider =
+_onSaving = false;
+    final notesProv =
         Provider.of<NoteProvider>(context, listen: false);
-    fisioProvider.addElement(_element.asunt, _element.note, _element.active).then((value) {
+    notesProv.addElement(_element.asunt, _element.note, _element.active).then((value) {
       _element = value;
       formKey.currentState!.reset();
-      _onSaving = false;
       setState(() {});
     });
   }

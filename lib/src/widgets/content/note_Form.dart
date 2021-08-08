@@ -5,7 +5,6 @@ import 'package:tu_cuenta_lecherita/src/providers/note_providers.dart';
 
 class NoteForm extends StatefulWidget {
   NoteForm({Key? key}) : super(key: key);
-  
 
   @override
   _NoteFormState createState() => _NoteFormState();
@@ -14,7 +13,6 @@ class NoteForm extends StatefulWidget {
 class _NoteFormState extends State<NoteForm> {
   //Clave para vincular el Formulario (Form)
   final formKey = GlobalKey<FormState>();
- 
 
   //Un objeto del modelo a enviar
   late Note _element;
@@ -24,34 +22,35 @@ class _NoteFormState extends State<NoteForm> {
   @override
   void initState() {
     super.initState();
-       _typeValue = _noteState.elementAt(0);
+    _typeValue = _noteState.elementAt(0);
     _element = Note.create("", "", _typeValue == "Nota resuelta");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-
-          child: CustomPaint(
-         
+      body: Container(
+        child: CustomPaint(
           child: SingleChildScrollView(
-      child: Stack(
-          alignment: AlignmentDirectional.topCenter,
-          children: [
-
-            Center(
-            child :Padding(
-          padding: const EdgeInsets.symmetric(vertical: 7.0),
-              child: Column(
-                children: [SizedBox(height: 35.0), _form() ],
-              ),
-            ),)
-          ],
+            child: Stack(
+              alignment: AlignmentDirectional.topCenter,
+              children: [
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 7.0),
+                    child: Column(
+                      children: [SizedBox(height: 35.0), _form()],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
       ),
-    ),
-        ),),);
-  } 
+    );
+  }
+
   _form() {
     final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
@@ -71,22 +70,23 @@ class _NoteFormState extends State<NoteForm> {
                   margin:
                       EdgeInsets.symmetric(vertical: 14.0, horizontal: 14.0),
                   child: Column(
-                    children: [ 
+                    children: [
                       _inputAsunt(),
                       _inputNote(),
                       _inputState(),
-                       _buttons()],
+                      _buttons()
+                    ],
                   ),
                 )),
           )
         ],
       ),
     );
-  } 
+  }
 
   _inputAsunt() {
     return TextFormField(
- initialValue: _element.asunt,
+        initialValue: _element.asunt,
         onSaved: (value) {
           _element.asunt = value.toString();
         },
@@ -97,10 +97,11 @@ class _NoteFormState extends State<NoteForm> {
             return null;
           }
         },
-    decoration: InputDecoration(labelText: "Asunto"),
+        decoration: InputDecoration(labelText: "Asunto"),
         maxLength: 35);
-  } 
-   _inputNote() {
+  }
+
+  _inputNote() {
     return TextFormField(
         initialValue: _element.note,
         onSaved: (value) {
@@ -115,11 +116,10 @@ class _NoteFormState extends State<NoteForm> {
           }
         },
         decoration: InputDecoration(labelText: "Nota"),
-        
         maxLines: 4);
   }
 
-    Widget _inputState() {
+  Widget _inputState() {
     return Column(
         children: _noteState
             .map((e) => ListTile(
@@ -148,29 +148,28 @@ class _NoteFormState extends State<NoteForm> {
             child: ElevatedButton(
               onPressed: () {
                 _sendForm();
-               
               },
-               child: const Text('Guardar'),
+              child: const Text('Guardar'),
             ),
           );
   }
- 
-  _sendForm() {
+
+  _sendForm() async {
     if (!formKey.currentState!.validate()) return;
     _onSaving = true;
     setState(() {});
 
     formKey.currentState!.save();
-_onSaving = false;
-    final notesProv =
-        Provider.of<NoteProvider>(context, listen: false);
-    notesProv.addElement(_element.asunt, _element.note, _element.active).then((value) {
+    _onSaving = false;
+    final notesProv = Provider.of<NoteProvider>(context, listen: false);
+    notesProv
+        .addElement(_element.asunt, _element.note, _element.active)
+        .then((value) {
       _element = value;
       formKey.currentState!.reset();
       setState(() {});
+      Navigator.pop(context);
     });
   }
-
-  
-}
  
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tu_cuenta_lecherita/src/pages/note_page.dart';
+import 'package:tu_cuenta_lecherita/src/pages/settings_page.dart';
 import 'package:tu_cuenta_lecherita/src/widgets/content/home_widget.dart'; 
 import 'package:tu_cuenta_lecherita/src/widgets/content/lechero_widget.dart';
  
@@ -11,10 +12,12 @@ class ItemMenu {
 }
 
 List<ItemMenu> menuOptions = [
-  ItemMenu(Icons.home, "Inicio"),
+  ItemMenu(Icons.home,  "Inicio"),
   ItemMenu.create(Icons.people, "Lecheros"),
  ItemMenu.create(Icons.note, "Anotaciones"),
+ ItemMenu.create(Icons.app_settings_alt,""),
+
 ];
 
-List<Widget> contentWidget = [HomeWidget(), MilkmanWidget(), NotesPage()];
+List<Widget> contentWidget = [HomeWidget(), MilkmanWidget(), NotesPage(),SettingsPage()];
 

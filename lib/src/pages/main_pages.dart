@@ -49,29 +49,31 @@ class _MainPageState extends State<MainPage> {
         
         child: CustomPaint(
           painter: FondoPaint1(),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                
-                Text(
-                  _selectedIndex == 0
-                      ? widget.titulo
-                      : menuOptions[_selectedIndex].label,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 40,
-                      height: 3,
-                      color: Colors.blue[900],
-                      fontFamily: 'VT323'),
-                ),
-                Container (
-                  height: 795.0,
-                  margin: EdgeInsets.symmetric(horizontal: 14.0),
-                  child: Container(
-                    child: contentWidget[_selectedIndex],
+          child: Container(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  
+                  Text(
+                    _selectedIndex == 0
+                        ? widget.titulo
+                        : menuOptions[_selectedIndex].label,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 40,
+                        height: 3,
+                        color: Colors.blue[900],
+                        fontFamily: 'VT323'),
                   ),
-                ),
-              ],
+                  Container (
+                    height: 795.0,
+                    margin: EdgeInsets.symmetric(horizontal: 14.0),
+                    child: Container(
+                      child: contentWidget[_selectedIndex],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

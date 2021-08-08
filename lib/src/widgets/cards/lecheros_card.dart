@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:tu_cuenta_lecherita/src/models/milkman_models-.dart';
 import 'package:tu_cuenta_lecherita/src/pages/milkmans_page.dart'; 
 
-class LecheroCard extends StatelessWidget {
+class LecheroCard extends StatefulWidget {
   const LecheroCard({Key? key, required this.milkman}) : super(key: key);
 final Milkman milkman;
 
+  @override
+  _LecheroCardState createState() => _LecheroCardState();
+}
+
+class _LecheroCardState extends State<LecheroCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -18,18 +23,18 @@ final Milkman milkman;
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => MilkmanPage(milkman: milkman),
+                builder: (context) => MilkmanPage(milkman: widget.milkman),
               ));
         },
-        title: Text(milkman.nombre + " " + milkman.apellido, style: TextStyle(color: Colors.white, fontSize: 20),),
+        title: Text(widget.milkman.nombre + " " + widget.milkman.apellido, style: TextStyle(color: Colors.white, fontSize: 20),),
         subtitle: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(milkman.direccion, style: TextStyle(color: Colors.white ),),
+          child: Text(widget.milkman.direccion, style: TextStyle(color: Colors.white ),),
         ),
          leading: ClipOval(
-child: milkman.photo == null
+child: widget.milkman.photo == null
                   ? Image.asset("assets/images/user.png")
-                  : Image.network(milkman.photo.toString())),
+                  : Image.network(widget.milkman.photo.toString())),
          ),
      
     );

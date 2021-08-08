@@ -11,6 +11,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  
   int _selectedIndex = 0;
   @override
   /*void initState() {
@@ -62,7 +63,7 @@ class _MainPageState extends State<MainPage> {
                     style: TextStyle(
                         fontSize: 40,
                         height: 3,
-                        color: Colors.blue[900],
+                        color: Colors.white,
                         fontFamily: 'VT323'),
                   ),
                   Container (
@@ -103,34 +104,38 @@ class _MainPageState extends State<MainPage> {
 class FondoPaint1 extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final height = size.height;
-    final width = size.width;
-    Paint paint = Paint();
-
-    Path mainBackground = Path();
-    mainBackground.addRect(Rect.fromLTRB(0, 0, width, height));
-    paint.color = Colors.white;
-    canvas.drawPath(mainBackground, paint);
-
-    Path ovalPath = Path();
-
-    paint.color = Colors.blue.shade900;
-    canvas.drawPath(ovalPath, paint);
-
-    ovalPath.lineTo(0, size.height * 0.090);
-    ovalPath.quadraticBezierTo(size.width * 0.07, size.height * 0.07,
-        size.width * 0.49, size.height * 0.05);
-    ovalPath.quadraticBezierTo(size.width * 0.78, size.height * 0.049,
-        size.width, size.height * 0.090);
-    ovalPath.lineTo(size.width, 0);
-    ovalPath.lineTo(0, 0);
-
-    canvas.drawPath(
-        ovalPath, paint); //esto es lo que permite que se dibuje todo
+    curva1(canvas, size);
   }
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
-    return oldDelegate != this;
+    return true;
+  }
+
+  void curva1(Canvas canvas, Size size) {
+    final paint = Paint();
+
+    paint.color = Color(0xFF0059FD);
+    paint.style = PaintingStyle
+        .fill; // .stroke es para dibujar una linea y  .fill es para pintar todo
+    paint.strokeWidth = 10.0;
+
+    final path = new Path();
+
+    /*
+    (0,0)-(0,size.heigth)-(size.width,size.heigth)-(size.width,0)
+     */
+
+    path.lineTo(0, size.height * 0.5);
+    path.quadraticBezierTo(size.width * 0.2, size.height * 0.17,
+        size.width * 0.5, size.height * 0.2);
+    path.quadraticBezierTo(
+        size.width * 0.85, size.height * 0.27, size.width, size.height * 0.25);
+    path.lineTo(size.width, 0);
+    path.lineTo(0, 0);
+
+    path.moveTo(0, size.height * 0.9); //salto del pincel o lapiz
+
+    canvas.drawPath(path, paint); //esto es lo que permite que se dibuje todo
   }
 }

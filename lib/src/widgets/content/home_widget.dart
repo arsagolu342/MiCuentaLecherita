@@ -20,7 +20,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       
       children: [
         
-        Text("Pagos Pendientes", textAlign: TextAlign.center, style: TextStyle(color: Colors.blue[900], fontSize: 15),),
+        Text("Pagos Pendientes", textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 15),),
         Expanded(child: SingleChildScrollView(child: PaymentList()))
       ],
     );

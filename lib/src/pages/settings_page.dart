@@ -24,38 +24,41 @@ class _SettingsPageState extends State<SettingsPage> {
     final appProvider = Provider.of<AppProvider>(context, listen: false);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Configuración'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          darkModePrefs == null
-              ? Container()
-              : Card(
-                  elevation: 5.0,
-                  child: ListTile(
-                    title: Text("Modo oscuro",
-                        style: Theme.of(context).textTheme.bodyText1),
-                    subtitle: Text(
-                        "Al activar el modo oscuro el tradicional fondo blanco se reemplaza por una interfaz de color oscuro, que varía entre negro y gris.",
-                        style: Theme.of(context).textTheme.caption),
-                    leading: Checkbox(
-                        value: darkModePrefs,
-                        onChanged: (value) {
-                          appProvider.darkMode = value ?? false;
-                          setDarkMode(value ?? false);
-                          if (value == true) {
-                            print("Modo oscuro activado");
-                          } else {
-                            print("Modo oscuro desactivado");
-                          }
-                          Navigator.pop(context);
-                        }),
-                  ),
-                )
-        ],
+       
+      body: Container(
+
+
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            
+            darkModePrefs == null
+                ? Container()
+                : Card(
+                    elevation: 5.0,
+                    child: ListTile(
+                      title: Text("Modo oscuro",
+                          style: Theme.of(context).textTheme.bodyText1),
+                      subtitle: Text(
+                          "Al activar el modo oscuro el tradicional fondo blanco se reemplaza por una interfaz de color oscuro, que varía entre negro y gris.",
+                          style: Theme.of(context).textTheme.caption),
+                      leading: Checkbox(
+                          value: darkModePrefs,
+                          onChanged: (value) {
+                            appProvider.darkMode = value ?? false;
+                            setDarkMode(value ?? false);
+                            if (value == true) {
+                              print("Modo oscuro activado");
+                            } else {
+                              print("Modo oscuro desactivado");
+                            }
+                            Navigator.pop(context);
+                          }),
+                    ),
+                  )
+          ],
+        ),
       ),
     );
   }
@@ -64,4 +67,8 @@ class _SettingsPageState extends State<SettingsPage> {
     darkModePrefs = await getDarkMode();
     setState(() {});
   }
+
+   
 }
+
+ 

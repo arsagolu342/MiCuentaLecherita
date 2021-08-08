@@ -28,7 +28,7 @@ class _MilkmanPageState extends State<MilkmanPage> {
       title: Text(
         widget.milkman.nombre + " " + widget.milkman.apellido,
         textAlign: TextAlign.start,
-        style: TextStyle(color: Colors.blue[900], fontSize: 15),
+        style: TextStyle(color: Colors.white, fontSize: 15),
       ),
       expandedHeight: 350.0,
       flexibleSpace: FlexibleSpaceBar(

@@ -12,10 +12,10 @@ class ItemMenu {
 }
 
 List<ItemMenu> menuOptions = [
-  ItemMenu(Icons.home_max_sharp,  "Inicio"),
-  ItemMenu.create(Icons.people_alt_sharp, "Lecheros"),
- ItemMenu.create(Icons.speaker_notes_sharp , "Anotaciones"),
- ItemMenu.create(Icons.app_settings_alt_sharp,""),
+  ItemMenu(Icons.home,  "Inicio"),
+  ItemMenu.create(Icons.people , "Lecheros"),
+ ItemMenu.create(Icons.speaker  , "Anotaciones"),
+ ItemMenu.create(Icons.settings_input_antenna,""),
 
 ];
 

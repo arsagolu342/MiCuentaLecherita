@@ -10,7 +10,7 @@ class MilkmanService {
   Future<List<Milkman>> getMilkmans() async {
     List<Milkman> items = [];
     try {
-      var uri = Uri.https("us-central1-cuentalecherita.cloudfunctions.net",
+      var uri = Uri.https("us-central1-cuentalecherita-f2647.cloudfunctions.net",
           "/api/milkmans/1/100");
       final resp = await http.get(uri);
       if (resp.body.isEmpty) return items;
@@ -29,7 +29,7 @@ class MilkmanService {
     try {
       final Map<String, String> _headers = {"content-type": "application/json"};
       var uri =
-          Uri.https("us-central1-cuentalecherita.cloudfunctions.net","/api/milkmans");
+          Uri.https("us-central1-cuentalecherita-f2647.cloudfunctions.net","/api/milkmans");
       String milkmanJson = milkmanToJson(milkman);
       final resp = await http.post(uri, headers: _headers, body: milkmanJson);
       if (resp.body.isEmpty) return null;

@@ -15,8 +15,12 @@ List<ItemMenu> menuOptions = [
   ItemMenu(Icons.home,  "Inicio"),
   ItemMenu.create(Icons.people , "Lecheros"),
  ItemMenu.create(Icons.speaker  , "Anotaciones"),
- ItemMenu.create(Icons.settings_input_antenna,""),
+ ItemMenu.create(Icons.settings ,"Configuración"),
 
+];
+List<ItemMenu> settingsOptions = [
+  ItemMenu(Icons.settings, "Configuración"),
+  ItemMenu(Icons.supervised_user_circle, "Créditos")
 ];
 
 List<Widget> contentWidget = [HomeWidget(), MilkmanWidget(), NotesPage(),SettingsPage()];

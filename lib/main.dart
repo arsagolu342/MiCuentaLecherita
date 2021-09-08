@@ -1,112 +1,86 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart'; 
-import 'package:tu_cuenta_lecherita/src/pages/main_pages.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:provider/provider.dart';
+import 'package:tu_cuenta_lecherita/src/pages/login.dart';
+import 'package:tu_cuenta_lecherita/src/pages/main_pages.dart'; 
+import 'package:tu_cuenta_lecherita/src/pages/settings_page.dart';
+import 'package:tu_cuenta_lecherita/src/pages/singup.dart';
+import 'package:tu_cuenta_lecherita/src/providers/login_provider.dart';
 import 'package:tu_cuenta_lecherita/src/providers/note_providers.dart';
-import 'package:tu_cuenta_lecherita/src/providers/app_providers.dart';
-import 'package:tu_cuenta_lecherita/src/utils/app_shared_preferences.dart';
+import 'package:tu_cuenta_lecherita/src/providers/app_providers.dart'; 
+import 'package:tu_cuenta_lecherita/src/utils/user_shared_preferences.dart';
 
-void main() {
-   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIOverlays(
-      [SystemUiOverlay.bottom, SystemUiOverlay.top]);
+Future<void> main() async {
+   
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  await Preferences().init();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<NoteProvider>(create: (_) => NoteProvider()),
     ChangeNotifierProvider<AppProvider>(create: (_) => AppProvider()),
   ], child: MyApp()));
 }
+//await Preferences().init();
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  final prefs = new Preferences();
   @override
   Widget build(BuildContext context) {
+    final appProvider = Provider.of<AppProvider>(context, listen: true);
+    appProvider.init(prefs.token, prefs.mode);
     return FutureBuilder(
-      future: Init.instance.initialize(),
+    
       builder: (context, AsyncSnapshot snapshot) {
         // Show splash screen while waiting for app resources to load:
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return MaterialApp(home: Splash());
+          return MaterialApp(home: MainPage(titulo: "Tu Cuenta Lecherita"));
         } else {
           // Loading is done, return the app:
-            return ChangeNotifierProvider<AppProvider>(
-        create: (BuildContext context) => AppProvider(),
-        child: Consumer<AppProvider>(builder: (context, provider, __) {
-          getDarkMode().then((value) => provider.darkMode = value);
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Tu Cuenta Lecherita',
-            theme: ThemeData(
-                brightness: provider.darkMode == true
+          // return ChangeNotifierProvider<AppProvider>(
+          //     create: (BuildContext context) => AppProvider(),
+          //     child: Consumer<AppProvider>(builder: (context, provider, __) {
+          //       getDarkMode().then((value) => provider.darkMode = value);
+
+                return LoginProvider(
+                  child: MaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    title: 'Tu Cuenta Lecherita',
+                    home: appProvider.token == ""
+                        ? const LoginPage()
+                        : JwtDecoder.isExpired(appProvider.token)
+                            ? const LoginPage()
+                            : const MainPage(titulo: "Tu Cuenta Lecherita"),
+                    routes: {
+                      "/login": (context) => const LoginPage(),
+                      "/singUp": (context) => const SingUpPage(),
+                      "/settings": (context) => const SettingsPage(),
+                    },
+
+                    theme: ThemeData(
+                       brightness: appProvider.darkMode == true
                     ? Brightness.dark
                     : Brightness.light,
                 primarySwatch: Colors.lightBlue),
-                home: MainPage(titulo: "Inicio")
-          );
-        }));
+                    // home: MainPage(titulo: "Inicio")
+                  ),
+                );
+              //
+             // );
+              //);
         }
       },
     );
-
-  
   }
 }
-class Splash extends StatelessWidget {
-   
-  @override
-  Widget build(BuildContext context) {
+
  
-     return Scaffold(
-      
-      body: Container(
-      
-        child: Stack(
 
-
-          
-          children: <Widget>[
-            Container(
-              child: Container(
-                height: double.infinity,
-                width: double.infinity,
-                child: CustomPaint(
-                  painter: FondoPaint1(),
-                ),
-              ),
-            ),
-            Center(
-              
-              child: Image(
-                image: AssetImage('assets/images/vaca.png'),
-                height: 300,
-              ),
-            ),
-          
-            ListTile(
-              title: Text(
-                "Tu Cuenta Lecherita",
-                textAlign: TextAlign.center,
-                style: TextStyle(height: 7, color: Colors.black,fontFamily: "Trajan Pro", fontSize: 35),
-              ),
-            ),
- 
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class Init {
-  Init._();
-  static final instance = Init._();
-
-  Future initialize() async {
-    // This is where you can initialize the resources needed by your app while
-    // the splash screen is displayed.  Remove the following example because
-    // delaying the user experience is a bad design practice!
-    await Future.delayed(Duration(seconds: 7));
-  }
-}
 class FondoPaint1 extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {

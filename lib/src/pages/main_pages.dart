@@ -1,51 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:tu_cuenta_lecherita/src/pages/milkman_form.dart';
-import 'package:tu_cuenta_lecherita/src/utils/enums.dart';
+import 'package:provider/provider.dart'; 
+import 'package:tu_cuenta_lecherita/src/pages/milkman_form.dart'; 
+import 'package:tu_cuenta_lecherita/src/providers/app_providers.dart';
+import 'package:tu_cuenta_lecherita/src/utils/enums.dart'; 
 
-class MainPage extends StatefulWidget {
+class MainPage extends StatelessWidget {
   const MainPage({Key? key, required this.titulo}) : super(key: key);
   final String titulo;
 
   @override
-  _MainPageState createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  
-  int _selectedIndex = 0;
-  @override
-  /*void initState() {
-    super.initState();
-    print("Inicio del estado");
-  }
-*/
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    final appProvider = Provider.of<AppProvider>(context, listen: true);
+    int selectedPage = appProvider.selectedPage;
 
-       floatingActionButton: _selectedIndex == 1
-          ? Container(
-           
-              child: FloatingActionButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MilkmanForm(),
-                        ));
-                  },
-                  child: const Icon(Icons.add),
-                ),
-           
-                
-
-              
-          )
-  
-          : null,
-          
-          
-      body: Container(
+    // var popupMenuButton = PopupMenuButton<ItemMenu>(
+    //         onSelected: (value) {
+    //           if (value.label == "Configuración") {
+    //             Navigator.pushNamed(context, "/settings");
+    //           }
+    //         },
+    //         itemBuilder: (BuildContext context) {
+    //           return settingsOptions.map((ItemMenu option) {
+    //             return PopupMenuItem<ItemMenu>(
+    //                 value: option,
+    //                 child: Row(
+    //                   children: [
+    //                     Icon(option.icon,
+    //                         color: Theme.of(context).primaryColor),
+    //                     SizedBox(width: 14.0),
+    //                     Text(option.label)
+    //                   ],
+    //                 ));
+    //           }).toList();
+    //         },
+    //       );
+    return Scaffold( 
+    
+      body:
+      Container(
 
         
         child: CustomPaint(
@@ -54,11 +46,8 @@ class _MainPageState extends State<MainPage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  
-                  Text(
-                    _selectedIndex == 0
-                        ? widget.titulo
-                        : menuOptions[_selectedIndex].label,
+                  Text(selectedPage == 0 ? titulo : menuOptions[selectedPage].label,
+                 
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 40,
@@ -70,36 +59,143 @@ class _MainPageState extends State<MainPage> {
                     height: 795.0,
                     margin: EdgeInsets.symmetric(horizontal: 14.0),
                     child: Container(
-                      child: contentWidget[_selectedIndex],
+                         child: contentWidget[selectedPage]),
+
+                         
                     ),
-                  ),
+                
                 ],
+                
               ),
             ),
           ),
         ),
       ),
 
-
+ floatingActionButton: selectedPage == 1
+          ? FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MilkmanForm(),
+                    ));
+              },
+              child: const Icon(Icons.add),
+            )
+          : null,
       bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.blue[900],
-          selectedItemColor: Colors.white,
-          currentIndex: _selectedIndex,
+          currentIndex: selectedPage,
           onTap: (value) {
-            _selectedIndex = value;
-            setState(() {
-              print("Cambio del estado");
-            });
+            appProvider.selectedPage = value;
           },
           items: menuOptions
-              .map((e) => BottomNavigationBarItem(
-                  icon: Icon(e.icon),
-                  label: e.label,
-                  backgroundColor: Colors.white))
+              .map((e) =>
+                  BottomNavigationBarItem(icon: Icon(e.icon), label: e.label))
               .toList()),
     );
   }
 }
+
+//  Text(selectedPage == 0 ? titulo : menuOptions[selectedPage].label),
+// import 'package:flutter/material.dart';
+// import 'package:tu_cuenta_lecherita/src/pages/milkman_form.dart';
+// import 'package:tu_cuenta_lecherita/src/utils/enums.dart';
+
+// class MainPage extends StatefulWidget {
+//   const MainPage({Key? key, required this.titulo}) : super(key: key);
+//   final String titulo;
+
+//   @override
+//   _MainPageState createState() => _MainPageState();
+// }
+
+// class _MainPageState extends State<MainPage> {
+  
+//   int _selectedIndex = 0;
+//   @override
+//   /*void initState() {
+//     super.initState();
+//     print("Inicio del estado");
+//   }
+// */
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+
+//        floatingActionButton: _selectedIndex == 1
+//           ? Container(
+           
+//               child: FloatingActionButton(
+//                   onPressed: () {
+//                     Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => MilkmanForm(),
+//                         ));
+//                   },
+//                   child: const Icon(Icons.add),
+//                 ),       
+//           )
+  
+//           : null,
+          
+          
+//       body: Container(
+
+        
+//         child: CustomPaint(
+//           painter: FondoPaint1(),
+//           child: Container(
+//             child: SingleChildScrollView(
+//               child: Column(
+//                 children: [
+                  
+//                   Text(
+//                     _selectedIndex == 0
+//                         ? widget.titulo
+//                         : menuOptions[_selectedIndex].label,
+//                     textAlign: TextAlign.center,
+//                     style: TextStyle(
+//                         fontSize: 40,
+//                         height: 3,
+//                         color: Colors.white,
+//                         fontFamily: 'VT323'),
+//                   ),
+//                   Container (
+//                     height: 795.0,
+//                     margin: EdgeInsets.symmetric(horizontal: 14.0),
+//                     child: Container(
+//                       child: contentWidget[_selectedIndex],
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+
+
+//       bottomNavigationBar: BottomNavigationBar(
+//           backgroundColor: Colors.blue[900],
+//           selectedItemColor: Colors.white,
+//           currentIndex: _selectedIndex,
+//           onTap: (value) {
+//             _selectedIndex = value;
+//             setState(() {
+//               print("Cambio del estado");
+//             });
+//           },
+//           items: menuOptions
+//               .map((e) => BottomNavigationBarItem(
+//                   icon: Icon(e.icon),
+//                   label: e.label,
+//                   backgroundColor: Colors.white))
+//               .toList()),
+//     );
+//   }
+// }
 
 class FondoPaint1 extends CustomPainter {
   @override

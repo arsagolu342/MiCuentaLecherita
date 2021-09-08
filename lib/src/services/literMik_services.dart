@@ -11,7 +11,7 @@ class LiterMilkService {
     List<LiterMilk> items = [];
     try {
       var uri = Uri.https(
-         "us-central1-cuentalecherita.cloudfunctions.net", "api/literMilks/$idmilkman");
+         "us-central1-cuentalecherita-f2647.cloudfunctions.net", "api/literMilks/$idmilkman");
       final resp = await http.get(uri);
       if (resp.body.isEmpty) return items;
       List<dynamic> jsonList = json.decode(resp.body);
@@ -29,7 +29,7 @@ Future<dynamic> sendLiterMilk(LiterMilk literMilk) async {
     try {
       final Map<String, String> _headers = {"content-type": "application/json"};
       var uri =
-          Uri.https("us-central1-cuentalecherita.cloudfunctions.net", "/api/literMilks");
+          Uri.https("us-central1-cuentalecherita-f2647.cloudfunctions.net", "/api/literMilks");
       final resp = await http.post(uri,
           headers: _headers, body: literMilkToJson(literMilk));
       if (resp.body.isEmpty) return null;

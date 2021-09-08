@@ -11,7 +11,7 @@ class PaymentService {
    Future<List<Payment>> getPaymentList() async {
     List<Payment> items = [];
     try {
-      var uri = Uri.https("us-central1-cuentalecherita.cloudfunctions.net",
+      var uri = Uri.https("us-central1-cuentalecherita-f2647.cloudfunctions.net",
           "/api/payments/1/100");
       final resp = await http.get(uri);
       if (resp.body.isEmpty) return items;
@@ -33,7 +33,7 @@ class PaymentService {
   Future<List<Payment>> getPayment(String idmilkman) async {
     List<Payment> items = [];
     try {
-      var uri = Uri.https("us-central1-cuentalecherita.cloudfunctions.net",
+      var uri = Uri.https("us-central1-cuentalecherita-f2647.cloudfunctions.net",
           "/api/payments/$idmilkman");
       final resp = await http.get(uri);
       if (resp.body.isEmpty) return items;
@@ -53,7 +53,7 @@ class PaymentService {
     try {
       final Map<String, String> _headers = {"content-type": "application/json"};
       var uri = Uri.https(
-          "us-central1-cuentalecherita.cloudfunctions.net", "/api/payments");
+          "us-central1-cuentalecherita-f2647.cloudfunctions.net", "/api/payments");
       final resp =
           await http.post(uri, headers: _headers, body: paymentToJson(payment));
       if (resp.body.isEmpty) return null;

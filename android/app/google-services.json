@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "176686303712",
+    "project_id": "cuentalecherita-f2647",
+    "storage_bucket": "cuentalecherita-f2647.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176686303712:android:4faf16ad8d0378d9568385",
+        "android_client_info": {
+          "package_name": "com.cuenta.lecherita.tu_cuenta_lecherita"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "176686303712-fkk10il43alkcqqoum3ilpd6ajka9g91.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8MwkXOY48bILX_d8KYPxo6yoEFX6_w8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "176686303712-fkk10il43alkcqqoum3ilpd6ajka9g91.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

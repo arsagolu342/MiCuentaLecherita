@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tu_cuenta_lecherita/src/providers/app_providers.dart';
 import 'package:tu_cuenta_lecherita/src/providers/login_provider.dart';
-import 'package:tu_cuenta_lecherita/src/services/user_service.dart';
-import 'package:tu_cuenta_lecherita/src/utils/standar_widfets.dart'; 
+import 'package:tu_cuenta_lecherita/src/services/user_service.dart'; 
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key});
@@ -26,7 +25,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
-              BackgroundWidget(),
+              
               SingleChildScrollView(
                 child: Column(
                   children: [
@@ -46,7 +45,7 @@ class LoginPage extends StatelessWidget {
                         child: Column(children: [
                           Padding(
                             padding: const EdgeInsets.only(top: 25.0),
-                            child: Text('Inicio de sesión',
+                            child: Text('Inicio de Sesión',
                                 style: Theme.of(context).textTheme.headline6),
                           ),
                           SizedBox(height: 25.0),
@@ -132,7 +131,7 @@ class SubmitButtonControl extends StatelessWidget {
         return ElevatedButton(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 7.0),
-              child: Text('Ingresar'),
+              child: Text('Iniciar Sesión'),
             ),
             onPressed: snapshot.hasData
                 ? () async {

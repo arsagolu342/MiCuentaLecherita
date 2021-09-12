@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tu_cuenta_lecherita/src/models/user_model.dart';
 import 'package:tu_cuenta_lecherita/src/providers/login_provider.dart';
 import 'package:tu_cuenta_lecherita/src/services/user_service.dart';
-import 'package:tu_cuenta_lecherita/src/utils/standar_widfets.dart'; 
 class SingUpPage extends StatelessWidget {
   const SingUpPage({Key? key});
 
@@ -14,7 +13,6 @@ class SingUpPage extends StatelessWidget {
       child: Scaffold(
         body: Stack(
           children: [
-            BackgroundWidget(),
             SingleChildScrollView(
               child: Column(
                 children: [

@@ -1,46 +1,4 @@
 import 'package:flutter/material.dart';
-
-class BackgroundWidget extends StatelessWidget {
-  const BackgroundWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
-    final circle = Container(
-      width: 100.0,
-      height: 100.0,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100.0),
-          color: Theme.of(context).disabledColor.withAlpha(30)),
-    );
-
-    final circle_2 = Container(
-      width: 100.0,
-      height: 100.0,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100.0),
-          color:  Colors.blue[900]),
-    );
-
-    return Stack(
-      children: [
-        Container(
-          height: size.height * 0.4,
-          width: double.infinity,
-            
-        ),
-        Positioned(top: 90.0, left: 30.0, child: circle),
-        Positioned(top: -40.0, left: -30.0, child: circle),
-        Positioned(top: 100.0, right: 150.0, child: circle),
-        Positioned(bottom: -50.0, right: -10.0, child: circle_2),
-        Positioned(bottom: 120.0, right: 20.0, child: circle_2),
-        Positioned(bottom: -50.0, left: -20.0, child: circle_2)
-      ],
-    );
-  }
-}
-
 class Standard {
   static AppBar appBar(BuildContext context, String title) {
     return AppBar(title: Text(title));

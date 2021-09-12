@@ -56,7 +56,7 @@ class MainPage extends StatelessWidget {
                         fontFamily: 'VT323'),
                   ),
                   Container (
-                    height: 795.0,
+                    height: 700.0,
                     margin: EdgeInsets.symmetric(horizontal: 14.0),
                     child: Container(
                          child: contentWidget[selectedPage]),
@@ -91,7 +91,11 @@ class MainPage extends StatelessWidget {
           },
           items: menuOptions
               .map((e) =>
-                  BottomNavigationBarItem(icon: Icon(e.icon), label: e.label))
+                  BottomNavigationBarItem(
+                    icon: Icon(e.icon),
+                     label: e.label,
+                     backgroundColor: Color(0xFF0059FD)))
+                   
               .toList()),
     );
   }

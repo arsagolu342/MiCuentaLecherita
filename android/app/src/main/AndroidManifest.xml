@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cuenta.lecherita.tu_cuenta_lecherita">
    <application
-        android:label="tu_cuenta_lecherita"
+        android:label="Tu Cuenta Lecherita"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -34,8 +34,12 @@
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+       
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyC8MwkXOY48bILX_d8KYPxo6yoEFX6_w8w"/>
+    
     </application>
 </manifest>

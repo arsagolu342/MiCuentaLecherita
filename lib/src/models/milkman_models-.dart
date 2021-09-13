@@ -1,5 +1,6 @@
 import 'dart:convert';
-
+import 'package:tu_cuenta_lecherita/src/utils/enums.dart';
+ 
 Milkman milkmanFromJson(String str) => Milkman.fromJson(json.decode(str));
 String milkmanToJson(Milkman data) => json.encode(data.toJson());
 class Milkman {
@@ -11,6 +12,8 @@ class Milkman {
       required this.ci,
       required this.direccion,
       this.photo,
+      this.georeference,
+      
            });
 Milkman.create(this.nombre, this.apellido, this.ci,this.direccion );
 
@@ -20,6 +23,7 @@ Milkman.create(this.nombre, this.apellido, this.ci,this.direccion );
   String ci;
   String direccion;
   String? photo;
+ GeoReference? georeference;
   getNombre() {
     return nombre + " " + apellido;
   }
@@ -30,7 +34,10 @@ Milkman.create(this.nombre, this.apellido, this.ci,this.direccion );
         ci: json["ci"],
         direccion: json["direccion"],
         photo: json["photo"],
-           );
+georeference: json["georeference"] == null
+          ? null
+          : GeoReference.fromJson(json["georeference"]));
+
   Map<String, dynamic> toJson() => {
         "idmilkman": idmilkman,
         "nombre": nombre,

@@ -6,9 +6,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
+import 'package:quick_actions/quick_actions.dart';
 import 'package:tu_cuenta_lecherita/src/pages/login.dart';
 import 'package:tu_cuenta_lecherita/src/pages/main_pages.dart'; 
 import 'package:tu_cuenta_lecherita/src/pages/settings_page.dart';
+import 'package:tu_cuenta_lecherita/src/pages/shortcuts.dart';
 import 'package:tu_cuenta_lecherita/src/pages/singup.dart';
 import 'package:tu_cuenta_lecherita/src/providers/login_provider.dart';
 import 'package:tu_cuenta_lecherita/src/providers/note_providers.dart';
@@ -57,17 +59,22 @@ Future<void> main() async {
 //await Preferences().init();
 
 class MyApp extends StatefulWidget {
- 
+
+  String shortcut = 'no action set';
+
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   final prefs = new Preferences();
+  final quickActions = QuickActions();
+  String shortcut = 'no action set';
 
 @override
   void initState() {
     super.initState();
+    initQuickActions();
     FirebaseMessaging.instance.getInitialMessage().then((value) {
       print('An initial message event was published!');
     });
@@ -146,6 +153,25 @@ class _MyAppState extends State<MyApp> {
       },
     );
   }
+
+   void initQuickActions() {
+    quickActions.initialize((type) {
+      if (type == null) return;
+
+      if (type == ShortcutItems.actionCreate.type) {
+        print('Pressed: Search');
+      } else if (type == ShortcutItems.actionTask.type) {
+        print('Pressed: Task');
+      }
+
+      setState(() {
+        shortcut = type;
+      });
+    });
+
+    quickActions.setShortcutItems(ShortcutItems.items);
+  }
+
 }
 
  

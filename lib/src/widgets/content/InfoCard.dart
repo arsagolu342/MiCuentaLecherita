@@ -5,14 +5,14 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:tu_cuenta_lecherita/src/models/milkman_models-.dart';
 import 'package:tu_cuenta_lecherita/src/services/milkman_service.dart';
 
-class HomeWidget extends StatefulWidget {
-  HomeWidget({Key? key}) : super(key: key);
+class InfoCard extends StatefulWidget {
+  InfoCard({Key? key}) : super(key: key);
 
   @override
-  _HomeWidgetState createState() => _HomeWidgetState();
+  _InfoCardState createState() => _InfoCardState();
 }
 
-class _HomeWidgetState extends State<HomeWidget> {
+class _InfoCardState extends State<InfoCard> {
   final MilkmanService _service = MilkmanService();
   List<Milkman>? _milkman = null;
   Set<Marker> _markers = new Set();
@@ -20,8 +20,8 @@ class _HomeWidgetState extends State<HomeWidget> {
   Completer<GoogleMapController> _controller = Completer();
 
   static final CameraPosition _kCentroLatacunga = CameraPosition(
-    target: LatLng(-0.9335863141754581, -78.61500222658208),
-    zoom: 18,
+    target: LatLng(-0.99021, -78.62868),
+    zoom: 20,
   );
 
   @override

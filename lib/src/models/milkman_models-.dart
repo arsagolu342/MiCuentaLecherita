@@ -23,7 +23,7 @@ Milkman.create(this.nombre, this.apellido, this.ci,this.direccion );
   String ci;
   String direccion;
   String? photo;
- GeoReference? georeference;
+  GeoReference? georeference;
   getNombre() {
     return nombre + " " + apellido;
   }
@@ -34,7 +34,7 @@ Milkman.create(this.nombre, this.apellido, this.ci,this.direccion );
         ci: json["ci"],
         direccion: json["direccion"],
         photo: json["photo"],
-georeference: json["georeference"] == null
+        georeference: json["georeference"] == null
           ? null
           : GeoReference.fromJson(json["georeference"]));
 
@@ -45,6 +45,5 @@ georeference: json["georeference"] == null
         "ci": ci,
         "direccion": direccion,
         "photo": photo,
-
       };
 }

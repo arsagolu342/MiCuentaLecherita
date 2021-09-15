@@ -19,7 +19,7 @@ class _InfoCardState extends State<InfoCard> {
 
   Completer<GoogleMapController> _controller = Completer();
 
-  static final CameraPosition _kCentroLatacunga = CameraPosition(
+  static final CameraPosition _centroMulalo = CameraPosition(
     target: LatLng(-0.99021, -78.62868),
     zoom: 20,
   );
@@ -39,19 +39,16 @@ class _InfoCardState extends State<InfoCard> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Ubicación actual", style: Theme.of(context).textTheme.bodyText1),
         SizedBox(
             height: _heigth * 0.5,
             child: GoogleMap(
               markers: _markers,
               mapType: MapType.normal,
-              initialCameraPosition: _kCentroLatacunga,
+              initialCameraPosition: _centroMulalo,
               onMapCreated: (GoogleMapController controller) {
                 _controller.complete(controller);
               },
             )),
-        Text("Próximas terapias", style: Theme.of(context).textTheme.bodyText1),
-        Expanded(child: SingleChildScrollView( ))
       ],
     );
   }

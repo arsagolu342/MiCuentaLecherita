@@ -8,27 +8,26 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
 import 'package:quick_actions/quick_actions.dart';
 import 'package:tu_cuenta_lecherita/src/pages/login.dart';
-import 'package:tu_cuenta_lecherita/src/pages/main_pages.dart'; 
+import 'package:tu_cuenta_lecherita/src/pages/main_pages.dart';
+import 'package:tu_cuenta_lecherita/src/pages/milkman_form.dart'; 
 import 'package:tu_cuenta_lecherita/src/pages/settings_page.dart';
-import 'package:tu_cuenta_lecherita/src/pages/shortcuts.dart';
 import 'package:tu_cuenta_lecherita/src/pages/singup.dart';
 import 'package:tu_cuenta_lecherita/src/providers/login_provider.dart';
 import 'package:tu_cuenta_lecherita/src/providers/note_providers.dart';
-import 'package:tu_cuenta_lecherita/src/providers/app_providers.dart'; 
+import 'package:tu_cuenta_lecherita/src/providers/app_providers.dart';
 import 'package:tu_cuenta_lecherita/src/utils/user_shared_preferences.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print('Handling a background message ${message.messageId}');
 }
+
 late AndroidNotificationChannel channel;
 late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
-
 Future<void> main() async {
-   
   WidgetsFlutterBinding.ensureInitialized();
-   await Firebase.initializeApp();
+  await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   if (!kIsWeb) {
@@ -40,7 +39,7 @@ Future<void> main() async {
     );
 
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-     await flutterLocalNotificationsPlugin
+    await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
@@ -59,27 +58,34 @@ Future<void> main() async {
 //await Preferences().init();
 
 class MyApp extends StatefulWidget {
-
-  String shortcut = 'no action set';
-
+  final QuickActions quickActions = QuickActions();
+ // String shortcut = 'no action set';
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   final prefs = new Preferences();
-  final quickActions = QuickActions();
-  String shortcut = 'no action set';
+  final QuickActions quickActions = QuickActions();
 
-@override
+  @override
   void initState() {
     super.initState();
-    initQuickActions();
     FirebaseMessaging.instance.getInitialMessage().then((value) {
       print('An initial message event was published!');
+
+    // quickActions.initialize(_navigateRoute);
+    // quickActions.setShortcutItems(<ShortcutItem>[
+    //   ShortcutItem(type: "/home", localizedTitle: "Pagos Pendientes",icon: "assets/images/pagos.png"),
+    //   ShortcutItem(type: "/milkmanForm", localizedTitle: "Agregar un Lechero",icon: "assets/images/agrgar.png"),
+    //    ShortcutItem(type: "/singUp2", localizedTitle: "Agregar Usuario",icon: "assets/images/agrgar.png"),
+      
+    //  ]);
+
+    
     });
 
- FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print('A new onMessage event was published!');
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
@@ -93,7 +99,7 @@ class _MyAppState extends State<MyApp> {
                 channel.id,
                 channel.name,
                 channel.description,
-                icon: 'ortopedica',
+                icon: ' ',
               ),
             ));
       }
@@ -106,75 +112,55 @@ class _MyAppState extends State<MyApp> {
       print(message);
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final appProvider = Provider.of<AppProvider>(context, listen: true);
     appProvider.init(prefs.token, prefs.mode);
     return FutureBuilder(
-    
       builder: (context, AsyncSnapshot snapshot) {
         // Show splash screen while waiting for app resources to load:
         if (snapshot.connectionState == ConnectionState.waiting) {
           return MaterialApp(home: MainPage(titulo: "Tu Cuenta Lecherita"));
-        } else {
-          // Loading is done, return the app:
-          // return ChangeNotifierProvider<AppProvider>(
-          //     create: (BuildContext context) => AppProvider(),
-          //     child: Consumer<AppProvider>(builder: (context, provider, __) {
-          //       getDarkMode().then((value) => provider.darkMode = value);
+        } else { 
+          return LoginProvider(
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Tu Cuenta Lecherita', 
+           
 
-                return LoginProvider(
-                  child: MaterialApp(
-                    debugShowCheckedModeBanner: false,
-                    title: 'Tu Cuenta Lecherita',
-                    home: appProvider.token == ""
-                        ? const LoginPage()
-                        : JwtDecoder.isExpired(appProvider.token)
-                            ? const LoginPage()
-                            : const MainPage(titulo: "Tu Cuenta Lecherita"),
-                    routes: {
-                      "/login": (context) => const LoginPage(),
-                      "/singUp": (context) => const SingUpPage(),
-                      "/settings": (context) => const SettingsPage(),
-                    },
-
-                    theme: ThemeData(
-                       brightness: appProvider.darkMode == true
-                    ? Brightness.dark
-                    : Brightness.light,
-                primarySwatch: Colors.lightBlue),
-                    // home: MainPage(titulo: "Inicio")
-                  ),
-                );
-              //
-             // );
-              //);
+              home: appProvider.token == ""
+                  ? const LoginPage()
+                  : JwtDecoder.isExpired(appProvider.token)
+                      ? const LoginPage()
+                      : const MainPage(titulo: "Inicio"),
+              routes: {
+                "/login": (context) => const LoginPage(),
+                "/singUp": (context) => const SingUpPage(),
+                "/settings": (context) => const SettingsPage(),
+               "/home": (context) => MainPage(titulo: "Inicio"),
+                "/milkmanForm": (context) => MilkmanForm(),
+                 "/singUp2": (context) =>  SingUpPage(),
+              },
+ initialRoute: '/home',
+              theme: ThemeData(
+                  brightness: appProvider.darkMode == true
+                      ? Brightness.dark
+                      : Brightness.light,
+                  primarySwatch: Colors.lightBlue),
+              // home: MainPage(titulo: "Inicio")
+            ),
+          );
+          //
+          // );
+          //);
         }
       },
     );
+    
   }
-
-   void initQuickActions() {
-    quickActions.initialize((type) {
-      if (type == null) return;
-
-      if (type == ShortcutItems.actionCreate.type) {
-        print('Pressed: Search');
-      } else if (type == ShortcutItems.actionTask.type) {
-        print('Pressed: Task');
-      }
-
-      setState(() {
-        shortcut = type;
-      });
-    });
-
-    quickActions.setShortcutItems(ShortcutItems.items);
-  }
-
-}
-
  
+}
 
 class FondoPaint1 extends CustomPainter {
   @override

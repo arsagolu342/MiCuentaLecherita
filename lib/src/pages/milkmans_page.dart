@@ -22,7 +22,7 @@ class _MilkmanPageState extends State<MilkmanPage> {
 
   Completer<GoogleMapController> _controller = Completer();
 
-  static final CameraPosition _kCentroLatacunga = CameraPosition(
+  static final CameraPosition _centroMulalo = CameraPosition(
     //centro de recoleccion de leche 
     target: LatLng(-0.90975, -78.62868),
     zoom: 18,
@@ -52,7 +52,7 @@ class _MilkmanPageState extends State<MilkmanPage> {
       title: Text(
         widget.milkman.nombre + " " + widget.milkman.apellido,
         textAlign: TextAlign.start,
-        style: TextStyle(color: Colors.white, fontSize: 15),
+        style: TextStyle(color: Color(0xFF0059FD), fontSize: 15),
       ),
       expandedHeight: 500.0,
       flexibleSpace: FlexibleSpaceBar(
@@ -66,7 +66,7 @@ class _MilkmanPageState extends State<MilkmanPage> {
               child: GoogleMap(
                 markers: _markers,
                 mapType: MapType.normal,
-                initialCameraPosition: _kCentroLatacunga,
+                initialCameraPosition: _centroMulalo,
                 onMapCreated: (GoogleMapController controller) {
                   _controller.complete(controller);
                 },

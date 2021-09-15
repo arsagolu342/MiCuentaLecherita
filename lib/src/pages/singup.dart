@@ -10,54 +10,66 @@ class SingUpPage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Container(
-      child: Scaffold(
-        body: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  SafeArea(
-                    
-                    child: Container(height: 200.0
-                                       
-                    , child: CustomPaint(
-                  painter: FondoPaint1(),
-                ),),
-                   
-                    ),
-                  Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
-                      width: size.width * .80,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).scaffoldBackgroundColor,
-                          borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                                blurRadius: 2.0,
-                                offset: Offset(0.0, 1.0),
-                                spreadRadius: 2.0)
-                          ]),
-                      child: Column(children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 25.0),
-                          child: Text('Registrarse',
-                              style: Theme.of(context).textTheme.headline6),
-                        ),
+      
+      child: Container(
 
-                        SizedBox(height: 25.0),
-                        UsernameSignUpTextControl(),
-                        SizedBox(height: 25.0),
-                        EmailSignUpTextControl(),
-                        SizedBox(height: 25.0),
-                        PasswordSignUpTextControl(),
-                        SizedBox(height: 25.0),
-                        SubmitSignUpButtonControl(),
-                        SizedBox(height: 25.0),
-                      ]))
-                ],
-              ),
-            )
-          ],
+        
+        child: Scaffold(
+          body: Container(
+            child: Stack(
+
+
+              
+              children: [
+                SingleChildScrollView(
+                  child: CustomPaint(
+
+                       
+                  painter: FondoPaint1(),
+               
+                    child: Column(
+                      children: [
+                        SafeArea(
+                          
+                          child: Container(height: 250.0)
+                        
+                          ),
+                        Container(
+                            padding: EdgeInsets.symmetric(horizontal: 20.0),
+                            width: size.width * .80,
+                            decoration: BoxDecoration(
+                                color: Theme.of(context).scaffoldBackgroundColor,
+                                borderRadius: BorderRadius.circular(10.0),
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                      blurRadius: 2.0,
+                                      offset: Offset(0.0, 1.0),
+                                      spreadRadius: 2.0)
+                                ]),
+                            child: Column(children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 25.0),
+                                child: Text('Registrarse',
+                                    style: Theme.of(context).textTheme.headline6),
+                              ),
+
+                              SizedBox(height: 25.0),
+                              UsernameSignUpTextControl(),
+                              SizedBox(height: 25.0),
+                              EmailSignUpTextControl(),
+                              SizedBox(height: 25.0),
+                              PasswordSignUpTextControl(),
+                              SizedBox(height: 25.0),
+                              SubmitSignUpButtonControl(),
+                              SizedBox(height: 25.0),
+                            ]))
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -166,6 +178,7 @@ class SubmitSignUpButtonControl extends StatelessWidget {
   }
 }
 
+
 class FondoPaint1 extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -200,13 +213,6 @@ class FondoPaint1 extends CustomPainter {
     path.lineTo(0, 0);
 
     path.moveTo(0, size.height * 0.9); //salto del pincel o lapiz
-    path.lineTo(0, size.height);
-    path.lineTo(size.width, size.height);
-    path.lineTo(size.width, size.height * 0.5);
-    path.quadraticBezierTo(size.width * 0.8, size.height * 0.7,
-        size.width * 0.5, size.height * 0.8);
-    path.quadraticBezierTo(
-        size.width * 0.2, size.height * 0.88, 0, size.height * 0.9);
 
     canvas.drawPath(path, paint); //esto es lo que permite que se dibuje todo
   }
